@@ -221,4 +221,37 @@ router.get(
   }
 );
 
+router.get(
+  "/:username/cancel/:bookId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+    Profile.findOne({ username: req.params.username })
+      .then(profile => {
+        if (profile) {
+          console.log(profile.username);
+
+          profile.availablehours.map(ah => {
+            const ah1 = ah.id;
+            console.log(ah1);
+            console.log(ah.user);
+
+            //check if the current user is the one that booked the time
+
+            if (ah.user == req.user.id) {
+              //if it matches save initialize ah.user to null
+
+              console.log(ah.user == req.user.id);
+              ah.user = null;
+
+              //save the schema
+              profile.save().then(profile => res.json(profile));
+            }
+          });
+        }
+      })
+      .catch(err => res.json(errors));
+  }
+);
+
 module.exports = router;

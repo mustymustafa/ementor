@@ -93,6 +93,20 @@ export const bookSession = (username, bookId) => dispatch => {
     );
 };
 
+//cancel a booking
+
+export const cancelSession = (username, bookId) => dispatch => {
+  axios
+    .get(`/profile/${username}/cancel/${bookId}`)
+    .then(res => dispatch(window.location.reload()))
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: null
+      })
+    );
+};
+
 // Profile loading
 export const setProfileLoading = () => {
   return {

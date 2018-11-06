@@ -8,7 +8,8 @@ import DashboardHeader from "../dashboard/DashboardHeader";
 import DashboardBody from "../dashboard/DashboardBody";
 import {
   getProfileByUsername,
-  bookSession
+  bookSession,
+  cancelSession
 } from "../../actions/profileActions";
 
 class Username extends Component {
@@ -24,6 +25,12 @@ class Username extends Component {
       return true;
     }
     return false;
+  }
+
+  //cancel a booking
+
+  onCancel(username, bookId) {
+    this.props.cancelSession(this.props.match.params.username, bookId);
   }
 
   componentDidMount() {
@@ -104,11 +111,15 @@ class Username extends Component {
                             </button>
                           )}
 
-                          <button className="btn btn-danger btn-xs">
+                          <button
+                            className="btn btn-danger btn-xs"
+                            onClick={this.onCancel.bind(
+                              this,
+                              profile.username,
+                              ah._id
+                            )}
+                          >
                             Cancel
-                          </button>
-                          <button>
-                            <i className="fa fa-book pr-1" />
                           </button>
                         </li>
                       ))}
@@ -150,5 +161,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { getProfileByUsername, bookSession }
+  { getProfileByUsername, bookSession, cancelSession }
 )(Username);

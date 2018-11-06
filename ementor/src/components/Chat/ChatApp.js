@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NameBox from "./NameBox.js";
 import Chat from "twilio-chat";
+import axios from "axios";
 
 class ChatApp extends Component {
   constructor(props) {
@@ -31,9 +32,8 @@ class ChatApp extends Component {
   };
 
   getToken = () => {
-    fetch("/chattoken", {
-      method: "POST"
-    })
+    axios
+      .post("/chattoken")
       .then(response => response.json())
       .then(data => {
         this.setState({ token: data.token }, this.initChat);
