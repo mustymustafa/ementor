@@ -8,7 +8,8 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm start --prefix ementor",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ementor && npm run build --prefix ementor"
   },
   "dependencies": {
     "bcrypt": "^3.0.2",
