@@ -138,14 +138,12 @@ app.post("/chattoken", (req, res) => {
 
   token.addGrant(
     new ChatGrant({
-      serviceSid: keys.twilioChatServiceSid,
-      endpointId: `${identity}:browser`
+      serviceSid: keys.twilioChatServiceSid
     })
   );
 
   // Serialize the token to a JWT string and include it in a JSON response
 
-  res.set("Content-Type", "application/json");
   res.send(
     JSON.stringify({
       identity: identity,

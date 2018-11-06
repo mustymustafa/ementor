@@ -9,7 +9,7 @@ import ChatApp from "../Chat/ChatApp";
 
 class VideoComponent extends Component {
   constructor(props) {
-    super(props);
+    super();
 
     this.state = {
       identity: null /* Will hold the fake name assigned */,
