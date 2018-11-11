@@ -90,69 +90,6 @@ app.use("/post", post);
 
 const port = process.env.PORT || 5000;
 
-//end point to generate access token
-app.get("/token", (req, res) => {
-  const identity = faker.name.findName();
-
-  //create an access token
-  const token = new AccessToken(
-    keys.twilioAccountSid,
-    keys.twilioApiKey,
-    keys.twilioApiSecret
-  );
-
-  //Assign the generated identity to the token
-
-  token.identity = identity;
-
-  //grant access token twilio video capabilities
-  const grant = new VideoGrant();
-  // grant.configurationProfileSid = process.env.TWILIO_CONFIGURATION_SID;
-  token.addGrant(grant);
-
-  // Serialize the token to a JWT string and include it in a JSON response
-  res.json({
-    identity: identity,
-    token: token.toJwt()
-  });
-
-  console.log(token.toJwt());
-});
-
-//end point to generate access token
-app.post("/chattoken", (req, res) => {
-  const identity = faker.name.findName();
-
-  //create an access token
-  const token = new AccessToken(
-    keys.twilioAccountSid,
-    "SK2a498c5c4287027fdafa55960ea59114",
-    "MPMqpZUSMwCzUzdclQhCt3bW90dR2AWd"
-  );
-
-  //Assign the generated identity to the token
-
-  token.identity = identity;
-
-  //add chat grant
-
-  token.addGrant(
-    new ChatGrant({
-      serviceSid: keys.twilioChatServiceSid
-    })
-  );
-
-  // Serialize the token to a JWT string and include it in a JSON response
-
-  res.send(
-    JSON.stringify({
-      identity: identity,
-      token: token.toJwt()
-    })
-  );
-
-  console.log(token.toJwt());
-});
 
 //serve static assets if in production
 

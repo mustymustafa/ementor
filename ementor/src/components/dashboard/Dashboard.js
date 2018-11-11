@@ -76,10 +76,10 @@ class Dashboard extends Component {
                       </div>
                       <div className="col-6">
                         <Link
-                          to="/editprofile"
+                          to={`/session/${profile.username}`}
                           className="btn btn-danger mb-3 float-right"
                         >
-                          Delete Account
+                          Create Session
                         </Link>
                       </div>
                     </div>

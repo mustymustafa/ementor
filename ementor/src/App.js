@@ -86,7 +86,7 @@ class App extends Component {
                 <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
               <Switch>
-                <Route exact path="/session" component={Video} />
+                <Route exact path="/session/:username" component={Video} />
               </Switch>{" "}
             </div>
 

@@ -23,13 +23,15 @@ class VideoComponent extends Component {
   }
 
   componentDidMount() {
-    axios.get("/token").then(results => {
-      /*
+    axios
+      .get(`/profile/${this.props.match.params.username}/token`)
+      .then(results => {
+        /*
 Make an API call to get the token and identity(fake name) and  update the corresponding state variables.
     */
-      const { identity, token } = results.data;
-      this.setState({ identity, token });
-    });
+        const { identity, token } = results.data;
+        this.setState({ identity, token });
+      });
   }
 
   handleRoomNameChange = e => {

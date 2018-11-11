@@ -7,10 +7,13 @@ const Profile = require("../../models/Profile");
 const middleware = require("../../middleware/index");
 const User = require("../../models/User");
 
+const keys = require("../../config/config.js");
+var faker = require("faker");
+
 const twilio = require("twilio");
 var AccessToken = require("twilio").jwt.AccessToken;
 var VideoGrant = AccessToken.VideoGrant;
-var faker = require("faker");
+const ChatGrant = AccessToken.ChatGrant;
 
 const validateProfileInput = require("../../validations/profile");
 
@@ -253,5 +256,69 @@ router.get(
       .catch(err => res.json(errors));
   }
 );
+
+//end point to generate access token
+router.get("/:username/token", (req, res) => {
+  const identity = faker.name.findName();
+
+  //create an access token
+  const token = new AccessToken(
+    keys.twilioAccountSid,
+    keys.twilioApiKey,
+    keys.twilioApiSecret
+  );
+
+  //Assign the generated identity to the token
+
+  token.identity = identity;
+
+  //grant access token twilio video capabilities
+  const grant = new VideoGrant();
+  // grant.configurationProfileSid = process.env.TWILIO_CONFIGURATION_SID;
+  token.addGrant(grant);
+
+  // Serialize the token to a JWT string and include it in a JSON response
+  res.json({
+    identity: identity,
+    token: token.toJwt()
+  });
+
+  console.log(token.toJwt());
+});
+
+//end point to generate access token
+router.post("/chattoken", (req, res) => {
+  const identity = faker.name.findName();
+
+  //create an access token
+  const token = new AccessToken(
+    keys.twilioAccountSid,
+    "SK2a498c5c4287027fdafa55960ea59114",
+    "MPMqpZUSMwCzUzdclQhCt3bW90dR2AWd"
+  );
+
+  //Assign the generated identity to the token
+
+  token.identity = identity;
+
+  //add chat grant
+
+  token.addGrant(
+    new ChatGrant({
+      serviceSid: keys.twilioChatServiceSid
+    })
+  );
+
+  // Serialize the token to a JWT string and include it in a JSON response
+
+  res.send(
+    JSON.stringify({
+      identity: identity,
+      token: token.toJwt()
+    })
+  );
+
+  console.log(token.toJwt());
+});
 
 module.exports = router;

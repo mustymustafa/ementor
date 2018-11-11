@@ -32,7 +32,7 @@ class ChatApp extends Component {
   };
 
   getToken = () => {
-    fetch("/chattoken", { method: "POST" })
+    fetch("/profile/chattoken", { method: "POST" })
       .then(response => response.json())
       .then(data => {
         this.setState({ token: data.token }, this.initChat);
