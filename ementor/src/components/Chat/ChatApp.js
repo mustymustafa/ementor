@@ -32,8 +32,7 @@ class ChatApp extends Component {
   };
 
   getToken = () => {
-    axios
-      .post("/chattoken")
+    fetch("/chattoken", { method: "POST" })
       .then(response => response.json())
       .then(data => {
         this.setState({ token: data.token }, this.initChat);
