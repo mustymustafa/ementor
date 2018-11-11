@@ -33,7 +33,7 @@ class PostItem extends Component {
             </div>
 
             <div className="col-md-10">
-              <p className="lead">{post.text}</p>
+              <div dangerouslySetInnerHTML={{ __html: post.text }} />
               <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
                 Reply
               </Link>

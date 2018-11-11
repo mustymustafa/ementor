@@ -29,21 +29,15 @@ class Editor extends Component {
           modules={Editor.modules}
           formats={Editor.formats}
         />
-        <div className="themeSwitcher">
-          <label>Theme </label>
-          <select onChange={e => this.handleThemeChange(e.target.value)}>
-            <option value="snow">Snow</option>
-          </select>
-        </div>
       </div>
     );
   }
 }
 
-/* 
-   * Quill modules to attach to editor
-   * See https://quilljs.com/docs/modules/ for complete options
-   */
+/*
+ * Quill modules to attach to editor
+ * See https://quilljs.com/docs/modules/ for complete options
+ */
 Editor.modules = {
   toolbar: [
     [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -63,10 +57,10 @@ Editor.modules = {
     matchVisual: false
   }
 };
-/* 
-   * Quill editor formats
-   * See https://quilljs.com/docs/formats/
-   */
+/*
+ * Quill editor formats
+ * See https://quilljs.com/docs/formats/
+ */
 Editor.formats = [
   "header",
   "font",
@@ -85,9 +79,9 @@ Editor.formats = [
   "formula"
 ];
 
-/* 
-   * PropType validation
-   */
+/*
+ * PropType validation
+ */
 Editor.propTypes = {
   placeholder: PropTypes.string
 };

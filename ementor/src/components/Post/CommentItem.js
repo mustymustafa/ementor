@@ -47,7 +47,7 @@ class CommentItem extends Component {
             </p>
           </div>
           <div className="col-md-10">
-            <p className="lead">{comment.text}</p>
+            <div dangerouslySetInnerHTML={{ __html: comment.text }} />
             <button
               onClick={this.onLikeClick.bind(this, postId, comment._id)}
               type="button"

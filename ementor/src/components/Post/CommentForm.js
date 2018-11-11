@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 
 import { addComment } from "../../actions/postActions";
+import Editor from "../Editor";
 
 class CommentForm extends Component {
   constructor(props) {
@@ -36,8 +37,8 @@ class CommentForm extends Component {
     this.setState({ text: "" });
   };
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange = html => {
+    this.setState({ text: html });
   };
 
   render() {
@@ -51,7 +52,7 @@ class CommentForm extends Component {
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                <textarea
+                <Editor
                   className={classnames("form-control form-control-lg", {
                     "is-invalid": errors.text
                   })}

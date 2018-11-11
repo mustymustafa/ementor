@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addPost } from "../../actions/postActions";
 import classnames from "classnames";
+import Editor from "../Editor";
 
 class Postform extends Component {
   constructor(props) {
@@ -19,10 +20,9 @@ class Postform extends Component {
     }
   }
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange = html => {
+    this.setState({ text: html });
   };
-
   onSubmit = e => {
     const { user } = this.props.auth;
     e.preventDefault();
@@ -51,7 +51,8 @@ class Postform extends Component {
             <div className="card-body">
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                  <textarea
+                  <Editor
+                    id="editor"
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.text
                     })}
