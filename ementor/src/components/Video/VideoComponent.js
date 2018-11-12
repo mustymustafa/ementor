@@ -9,11 +9,11 @@ import ChatApp from "../Chat/ChatApp";
 
 class VideoComponent extends Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
       identity: null /* Will hold the fake name assigned */,
-      roomName: "" /* Will store the room name */,
+      roomName: this.props.match.params.username /* Will store the room name */,
       roomNameErr: false /* Track error for room name TextField. This will    enable us to show an error message when this variable is true */,
       previewTracks: null,
       localMediaAvailable: false /* Represents the availability of a LocalAudioTrack(microphone) and a LocalVideoTrack(camera) */,
@@ -36,7 +36,7 @@ Make an API call to get the token and identity(fake name) and  update the corres
 
   handleRoomNameChange = e => {
     /* fetch room name from text field and update state */
-    let roomName = e.target.value;
+    let roomName = this.props.match.params.username;
     this.setState({ roomName });
   };
 
@@ -200,13 +200,6 @@ Connect to a room by providing the token and connection    options that include 
             {/*show local track if available */}
             <div className="flex-item">
               {/*The following text field is used to enter a room name. It calls  `handleRoomNameChange` method when the text changes which sets the `roomName` variable initialized in the state.*/}
-              <TextField
-                label="Room name"
-                onChange={this.handleRoomNameChange}
-                onError={
-                  this.state.roomNameErr ? "Room Name is Required" : undefined
-                }
-              />
               <br />
               {joinOrLeaveRoomButton}{" "}
               {/* Show either ‘Leave Room’ or ‘Join Room’ button */}
@@ -222,7 +215,7 @@ The following div element shows all remote media (other                         
           </Grid>
 
           <Grid item xs={12}>
-            <ChatApp />
+            <ChatApp name={this.props.match.params.username} />
           </Grid>
         </Grid>
       </div>

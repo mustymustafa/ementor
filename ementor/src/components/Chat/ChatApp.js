@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NameBox from "./NameBox.js";
 import Chat from "twilio-chat";
-import axios from "axios";
+import Editor from "../Editor";
 
 class ChatApp extends Component {
   constructor(props) {
@@ -27,12 +27,10 @@ class ChatApp extends Component {
     }
   };
 
-  onNameChanged = event => {
-    this.setState({ name: event.target.value });
-  };
-
   getToken = () => {
-    fetch("/profile/chattoken", { method: "POST" })
+    fetch("/profile/chattoken", {
+      method: "POST"
+    })
       .then(response => response.json())
       .then(data => {
         this.setState({ token: data.token }, this.initChat);
@@ -89,15 +87,15 @@ class ChatApp extends Component {
           return this.channel.join();
         })
         .then(() => {
-          this.channel.getMessages().then(this.messagesLoaded);
+          this.channel.getMessages(); //.then(this.messagesLoaded);
           this.channel.on("messageAdded", this.messageAdded);
         });
     });
   };
 
-  messagesLoaded = messagePage => {
-    this.setState({ messages: messagePage.items });
-  };
+  // messagesLoaded = messagePage => {
+  // this.setState({ messages: messagePage.items });
+  //};
 
   messageAdded = message => {
     this.setState((prevState, props) => ({
@@ -105,10 +103,13 @@ class ChatApp extends Component {
     }));
   };
 
-  onMessageChanged = event => {
-    this.setState({ newMessage: event.target.value });
+  onMessageChanged = html => {
+    this.setState({ newMessage: html });
   };
 
+  onNameChanged = e => {
+    this.setState({ name: e.target.value });
+  };
   sendMessage = event => {
     event.preventDefault();
     const message = this.state.newMessage;
@@ -123,11 +124,15 @@ class ChatApp extends Component {
   };
 
   render() {
+    const { name } = this.props;
+    this.state.name = name;
+
     var loginOrChat;
     const messages = this.state.messages.map(message => {
       return (
         <li key={message.sid} ref={this.newMessageAdded}>
-          <b>{message.author}:</b> {message.body}
+          <b>{this.state.name}:</b>{" "}
+          <div dangerouslySetInnerHTML={{ __html: message.body }} />
         </li>
       );
     });
@@ -135,34 +140,30 @@ class ChatApp extends Component {
       loginOrChat = (
         <div>
           <h3>Messages</h3>
-          <p>Logged in as {this.state.name}</p>
+
           <ul className="messages">{messages}</ul>
           <form onSubmit={this.sendMessage}>
             <label htmlFor="message">Message: </label>
-            <input
-              type="text"
+            <Editor
               name="message"
               id="message"
               onChange={this.onMessageChanged}
               value={this.state.newMessage}
             />
+
             <button>Send</button>
           </form>
           <br />
           <br />
           <form onSubmit={this.logOut}>
-            <button>Log out</button>
+            <button>Close</button>
           </form>
         </div>
       );
     } else {
       loginOrChat = (
         <div>
-          <NameBox
-            name={this.state.name}
-            onNameChanged={this.onNameChanged}
-            logIn={this.logIn}
-          />
+          <NameBox name={name} logIn={this.logIn} />
         </div>
       );
     }

@@ -11,5 +11,5 @@ module.exports = {
   twilioAccountSid: "ACe9893a7e6a1804ac297a18737f64a6d5",
   twilioApiKey: "SK490012c50ff8319b8443c27d053335eb",
   twilioApiSecret: "SRmwojs27mWgy9I1lOu0zXan5wRJrCgM",
-  twilioChatServiceSid: "ISa0b1b6fcf3914f6ea60076d29a598557"
+  twilioChatServiceSid: "ISeaa2795505b740d0951b02dec55e3eab"
 };
