@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from "@material-ui/core/Button";
 
 class NameBox extends Component {
   render() {
@@ -19,7 +20,14 @@ class NameBox extends Component {
             value={name}
             style={inputStyle}
           />
-          <button type="submit">Open Text Box</button>
+          <Button
+            color="primary"
+            variant="outlined"
+            type="submit"
+            style={{ width: "200px" }}
+          >
+            Open Text Box
+          </Button>
         </form>
       </div>
     );

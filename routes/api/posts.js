@@ -125,6 +125,7 @@ nodemailer.createTestAccount((err, account) => {
     Comment.find()
       .where("post.id")
       .equals(req.params.id)
+      .sort({ likes: -1 })
       .then(comment => {
         console.log("comment found");
         res.json(comment);

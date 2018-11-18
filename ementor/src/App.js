@@ -64,7 +64,11 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
-              <Route exact path="/profile/:username" component={Username} />
+              <PrivateRoute
+                exact
+                path="/profile/:username"
+                component={Username}
+              />
               <Route exact path="/posts" component={Posts} />
               <Switch>
                 {" "}
@@ -86,7 +90,7 @@ class App extends Component {
                 <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
               <Switch>
-                <Route exact path="/session/:username" component={Video} />
+                <PrivateRoute exact path="/session/:id" component={Video} />
               </Switch>{" "}
             </div>
 

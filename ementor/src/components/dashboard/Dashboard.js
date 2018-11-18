@@ -8,10 +8,13 @@ import isEmpty from "../../is-empty";
 import DashboardHeader from "./DashboardHeader";
 import { addPost } from "../../actions/postActions";
 import classnames from "classnames";
+import axios from "axios";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      invite: " ",
+      link: "",
       text: "",
       errors: {}
     };
@@ -41,6 +44,22 @@ class Dashboard extends Component {
     this.setState({ text: " " });
   };
 
+  onInviteChange = e => {
+    this.setState({ invite: e.target.value });
+  };
+
+  onInvite = e => {
+    e.preventDefault();
+
+    const data = {
+      invite: this.state.invite,
+      link: this.state.link
+    };
+
+    axios.post("/profile/invite", data);
+    window.location.assign(`/${this.state.link}`);
+  };
+
   componentDidMount() {
     this.props.getCurrentProfile();
   }
@@ -49,6 +68,8 @@ class Dashboard extends Component {
     const { errors } = this.state;
     const { user } = this.props.auth;
     const { loading, profile } = this.props.profile;
+
+    this.state.link = `session/${user.id}`;
 
     const firstname = user.fn.trim().split(" ")[0];
     let dashboardContent;
@@ -77,7 +98,7 @@ class Dashboard extends Component {
                       <div className="col-6">
                         <button
                           type="button"
-                          class="btn btn-info btn-lg"
+                          class="btn btn-info btn-lg float-right"
                           data-toggle="modal"
                           data-target="#myModal"
                         >
@@ -95,29 +116,27 @@ class Dashboard extends Component {
                                 >
                                   &times;
                                 </button>
-                                <h4 class="modal-title">Modal Header</h4>
                               </div>
                               <div class="modal-body">
-                                <p>This is a small modal.</p>
-                              </div>
-                              <div class="modal-footer">
-                                <button
-                                  type="button"
-                                  class="btn btn-default"
-                                  data-dismiss="modal"
-                                >
-                                  Close
-                                </button>
+                                <form onSubmit={this.onInvite}>
+                                  invite:{" "}
+                                  <input
+                                    type="email"
+                                    onChange={this.onInviteChange}
+                                  />
+                                  <div class="modal-footer">
+                                    <button
+                                      type="submit"
+                                      className="btn btn-default"
+                                    >
+                                      create
+                                    </button>
+                                  </div>
+                                </form>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <Link
-                          to={`/session/${profile.username}`}
-                          className="btn btn-danger mb-3 float-right"
-                        >
-                          Create Session
-                        </Link>
                       </div>
                     </div>
 
@@ -180,7 +199,6 @@ class Dashboard extends Component {
                                         "is-invalid": errors.text
                                       }
                                     )}
-                                    placeholder="Ask a question"
                                     name="text"
                                     onChange={this.onChange}
                                     value={this.state.text}

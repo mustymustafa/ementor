@@ -31,7 +31,7 @@ class CommentItem extends Component {
     return (
       <div className="card card-body mb-3">
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-md-3">
             <a href="profile.html">
               <img
                 className="rounded-circle"
@@ -46,7 +46,7 @@ class CommentItem extends Component {
               {comment.user.fn}
             </p>
           </div>
-          <div className="col-md-10">
+          <div className="col-md-9">
             <div dangerouslySetInnerHTML={{ __html: comment.text }} />
             <button
               onClick={this.onLikeClick.bind(this, postId, comment._id)}

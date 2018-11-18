@@ -4,6 +4,8 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import ChatApp from "../Chat/ChatApp";
 
@@ -14,7 +16,7 @@ class VideoComponent extends Component {
     this.state = {
       votes: "",
       identity: null /* Will hold the fake name assigned */,
-      roomName: this.props.match.params.username /* Will store the room name */,
+      roomName: this.props.match.params.id /* Will store the room name */,
       roomNameErr: false /* Track error for room name TextField. This will    enable us to show an error message when this variable is true */,
       previewTracks: null,
       localMediaAvailable: false /* Represents the availability of a LocalAudioTrack(microphone) and a LocalVideoTrack(camera) */,
@@ -24,20 +26,18 @@ class VideoComponent extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get(`/profile/${this.props.match.params.username}/token`)
-      .then(results => {
-        /*
+    axios.get(`/profile/${this.props.match.params.id}/token`).then(results => {
+      /*
 Make an API call to get the token and identity(fake name) and  update the corresponding state variables.
     */
-        const { identity, token } = results.data;
-        this.setState({ identity, token });
-      });
+      const { identity, token } = results.data;
+      this.setState({ identity, token });
+    });
   }
 
   handleRoomNameChange = e => {
     /* fetch room name from text field and update state */
-    let roomName = this.props.match.params.username;
+    let roomName = this.props.match.params.id;
     this.setState({ roomName });
   };
 
@@ -178,13 +178,19 @@ Connect to a room by providing the token and connection    options that include 
 
     axios
       .post(`/profile/${this.props.match.params.username}/vote`, vote)
-      .then(res =>
-        this.props.history.push(`/profile/${this.props.match.params.username}`)
+      .then(
+        res =>
+          this.props.history.push(
+            `/profile/${this.props.match.params.username}`
+          ),
+        window.location.reload()
       )
+
       .catch(err => console.log(err));
   };
 
   render() {
+    const { auth } = this.props;
     /* 
    Controls showing of the local track
    Only show video track after user has joined a room else show nothing 
@@ -204,11 +210,21 @@ Connect to a room by providing the token and connection    options that include 
   */
 
     let joinOrLeaveRoomButton = this.state.hasJoinedRoom ? (
-      <Button color="secondary" variant="outlined" onClick={this.leaveRoom}>
+      <Button
+        color="secondary"
+        variant="outlined"
+        onClick={this.leaveRoom}
+        style={{ width: "200px" }}
+      >
         Exit Session
       </Button>
     ) : (
-      <Button color="primary" variant="outlined" onClick={this.joinRoom}>
+      <Button
+        color="primary"
+        variant="outlined"
+        onClick={this.joinRoom}
+        style={{ width: "200px" }}
+      >
         Join Session
       </Button>
     );
@@ -233,16 +249,62 @@ The following div element shows all remote media (other                         
 
             <div className="flex-item" ref="remoteMedia" id="remote-media" />
 
-            <div>
-              <form onSubmit={this.onSubmit}>
-                <input type="number" onChange={this.onVote} />
-                <button type="submit">Rate Tutor</button>
-              </form>
+            {auth.user.id === this.props.match.params.id ? (
+              <button
+                type="button"
+                className="btn btn-info btn-lg"
+                data-toggle="modal"
+                data-target="#myModal"
+                style={{ display: "none" }}
+              >
+                Rate Tutor
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-info btn-lg"
+                data-toggle="modal"
+                data-target="#myModal"
+              >
+                Rate Tutor
+              </button>
+            )}
+
+            <div className="modal fade" id="myModal" role="dialog">
+              <div className="modal-dialog modal-sm">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <form onSubmit={this.onSubmit}>
+                      <input
+                        type="number"
+                        max="10"
+                        min="0"
+                        onChange={this.onVote}
+                      />{" "}
+                      / 10
+                      <div className="modal-footer">
+                        <button type="submit" className="btn btn-default">
+                          Rate
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
           </Grid>
 
           <Grid item xs={12}>
-            <ChatApp name={this.props.match.params.username} />
+            <ChatApp name={this.props.match.params.id} />
           </Grid>
         </Grid>
       </div>
@@ -250,4 +312,11 @@ The following div element shows all remote media (other                         
   }
 }
 
-export default VideoComponent;
+VideoComponent.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(mapStateToProps)(VideoComponent);

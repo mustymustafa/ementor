@@ -80,20 +80,20 @@ class Username extends Component {
                 <div className="row">
                   <div className="col-12">
                     <h4>Available Times</h4>
-                    <ul className="list-group">
+                    <ul className="list-group" style={{ width: "290px" }}>
                       {profile.availablehours.map((ah, index) => (
                         <li key={index} className="list-group-item">
                           {ah.time}
 
                           {ah.user !== null ? (
                             <button
-                              id="book"
+                              style={{ marginLeft: "5px" }}
                               onClick={this.onBook.bind(
                                 this,
                                 profile.username,
                                 ah._id
                               )}
-                              className="btn btn-primary btn-xs"
+                              className="btn btn-primary btn-s"
                               type="button"
                               disabled
                             >
@@ -101,13 +101,13 @@ class Username extends Component {
                             </button>
                           ) : (
                             <button
-                              id="book"
+                              style={{ marginLeft: "5px" }}
                               onClick={this.onBook.bind(
                                 this,
                                 profile.username,
                                 ah._id
                               )}
-                              className="btn btn-primary btn-xs"
+                              className="btn btn-primary btn-s"
                               type="button"
                             >
                               Book
@@ -115,7 +115,7 @@ class Username extends Component {
                           )}
 
                           <button
-                            className="btn btn-danger btn-xs"
+                            className="btn btn-danger btn-s float-right"
                             onClick={this.onCancel.bind(
                               this,
                               profile.username,

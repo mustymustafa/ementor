@@ -175,6 +175,7 @@ nodemailer.createTestAccount((err, account) => {
     const errors = {};
     Profile.find()
       .populate("user", ["fn", "email"])
+      .sort({ rating: -1 })
       .then(profile => {
         if (!profile) {
           errors.noprofile = "there are no users here";
@@ -322,7 +323,7 @@ nodemailer.createTestAccount((err, account) => {
   );
 
   //end point to generate access token
-  router.get("/:username/token", (req, res) => {
+  router.get("/:id/token", (req, res) => {
     const identity = faker.name.findName();
 
     //create an access token
@@ -406,6 +407,20 @@ router.post("/:username/vote", (req, res) => {
 
     profile.save().then(voted => console.log(total));
   });
+});
+
+//invite route
+
+router.post("/invite", (req, res) => {
+  const email = req.body.invite;
+  const link = req.body.link;
+
+  
+  console.log(email);
+  console.log(link);
+
+
+  //send email here
 });
 
 module.exports = router;
