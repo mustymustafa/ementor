@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../common/spinner/Spinner";
-import isEmpty from "../../validation/is-empty";
+
+import rating from "../rating/rating";
+
 import DashboardHeader from "../dashboard/DashboardHeader";
 import DashboardBody from "../dashboard/DashboardBody";
 import {
@@ -47,6 +49,7 @@ class Username extends Component {
 
   render() {
     const { loading, profile } = this.props.profile;
+    const { auth } = this.props.auth;
 
     let profileContent;
     if (profile === null || loading) {

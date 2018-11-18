@@ -18,10 +18,10 @@ const postSchema = new Schema({
     required: true
   },
 
-  //category: {
-  //  type: String,
-  // require: true
-  //},
+  category: {
+    type: String,
+    required: true
+  },
 
   comments: [
     {
@@ -36,7 +36,6 @@ const postSchema = new Schema({
         isTutor: Boolean
       },
 
-
       text: String,
 
       date: {
@@ -46,7 +45,6 @@ const postSchema = new Schema({
     }
   ],
 
-  
   likes: [
     {
       user: {

@@ -24,6 +24,7 @@ class DashboardHeader extends Component {
             <div className="text-center">
               <h1 className="display-4 text-center">{profile.user.fn}</h1>
               <p>username: {profile.username}</p>
+              <p>Rating: {profile.rating}</p>
               <p>Status: {profile.status}</p>
               <p>School: {profile.school}</p>
 

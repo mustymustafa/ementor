@@ -12,6 +12,7 @@ class VideoComponent extends Component {
     super(props);
 
     this.state = {
+      votes: "",
       identity: null /* Will hold the fake name assigned */,
       roomName: this.props.match.params.username /* Will store the room name */,
       roomNameErr: false /* Track error for room name TextField. This will    enable us to show an error message when this variable is true */,
@@ -164,6 +165,25 @@ Connect to a room by providing the token and connection    options that include 
     this.detachTracks(tracks);
   };
 
+  onVote = e => {
+    this.setState({ votes: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    const vote = {
+      votes: this.state.votes
+    };
+
+    axios
+      .post(`/profile/${this.props.match.params.username}/vote`, vote)
+      .then(res =>
+        this.props.history.push(`/profile/${this.props.match.params.username}`)
+      )
+      .catch(err => console.log(err));
+  };
+
   render() {
     /* 
    Controls showing of the local track
@@ -212,6 +232,13 @@ The following div element shows all remote media (other                         
     */}
 
             <div className="flex-item" ref="remoteMedia" id="remote-media" />
+
+            <div>
+              <form onSubmit={this.onSubmit}>
+                <input type="number" onChange={this.onVote} />
+                <button type="submit">Rate Tutor</button>
+              </form>
+            </div>
           </Grid>
 
           <Grid item xs={12}>

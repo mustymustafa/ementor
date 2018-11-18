@@ -3,8 +3,6 @@ var bcrypt = require("bcrypt");
 //creating job schema
 
 var UserSchema = new mongoose.Schema({
-
-
   fn: {
     type: String,
 

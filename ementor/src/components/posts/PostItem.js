@@ -30,14 +30,16 @@ class PostItem extends Component {
                 posted by:
                 {post.user.fn}
               </p>
+
+              <p>category:{post.category}</p>
             </div>
 
             <div className="col-md-10">
               <div dangerouslySetInnerHTML={{ __html: post.text }} />
+
               <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
                 Reply
               </Link>
-
               {post.user.id === auth.user.id ? (
                 <button
                   onClick={this.onDeleteClick.bind(this, post._id)}

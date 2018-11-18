@@ -57,6 +57,14 @@ const profileSchema = new Schema({
     }
   ],
 
+  ratings: {
+    type: [Number]
+  },
+
+  rating: {
+    type: Number
+  },
+
   office: {
     type: String
   },

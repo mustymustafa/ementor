@@ -10,18 +10,23 @@ class Postform extends Component {
     super(props);
     this.state = {
       text: "",
+      category: "",
       errors: {}
     };
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.errors) {
-      this.setState({ errors: newProps.errors });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
   }
 
   onChange = html => {
     this.setState({ text: html });
+  };
+
+  onCategory = e => {
+    this.setState({ category: e.target.value });
   };
   onSubmit = e => {
     const { user } = this.props.auth;
@@ -29,7 +34,8 @@ class Postform extends Component {
 
     const newPost = {
       text: this.state.text,
-      name: user.fn
+      name: user.fn,
+      category: this.state.category
       //avatar: user.avatar
     };
 
@@ -46,7 +52,7 @@ class Postform extends Component {
         <div className="post-form mb-3">
           <div className="card card-info">
             <div className="card-header bg-info text-white">
-              Say Somthing...
+              Ask a Quesion...
             </div>
             <div className="card-body">
               <form onSubmit={this.onSubmit}>
@@ -65,9 +71,35 @@ class Postform extends Component {
                     <div className="invalid-feedback">{errors.text}</div>
                   )}
                 </div>
-                <button type="submit" className="btn btn-dark">
-                  Submit
-                </button>
+                <div className="row">
+                  <div className="col-6">
+                    <button
+                      type="submit"
+                      className="btn btn-dark mb-3 float-left"
+                    >
+                      Submit
+                    </button>
+                  </div>
+
+                  <div className="col-6">
+                    <select
+                      style={selectStyle}
+                      className="form-control float-right"
+                      id="category"
+                      onChange={this.onCategory}
+                      value={this.state.category}
+                    >
+                      <option label="*Select a category*" disabled />
+                      <option>SITC</option>
+                      <option>SBE</option>
+                      <option>SOL</option>
+                      <option>SAS</option>
+                    </select>
+                  </div>
+                  {errors.category && (
+                    <div className="invalid-feedback">{errors.category}</div>
+                  )}
+                </div>
               </form>
             </div>
           </div>
@@ -76,6 +108,10 @@ class Postform extends Component {
     );
   }
 }
+
+const selectStyle = {
+  width: "190px"
+};
 
 Postform.propTypes = {
   addPost: PropTypes.func.isRequired,

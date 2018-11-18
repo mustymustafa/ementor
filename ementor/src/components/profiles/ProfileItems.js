@@ -21,7 +21,7 @@ class ProfileItem extends Component {
             <p>{profile.status}</p>
             <p>{profile.school}</p>
 
-            <p>rating: 8/10</p>
+            <p>rating: {profile.rating}</p>
             <a href={`/profile/${profile.username}`} className="btn btn-info">
               View Profile
             </a>
