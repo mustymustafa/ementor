@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import isEmpty from "../../validation/is-empty";
+import pp from "../../img/pp.png";
 
 class DashboardHeader extends Component {
   render() {
@@ -14,17 +15,20 @@ class DashboardHeader extends Component {
           >
             <div className="row">
               <div className="col-4 col-md-3 m-auto">
-                <img
-                  className="rounded-circle"
-                  src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-                  alt=""
-                />
+                <img className="rounded-circle" src={pp} alt="" />
               </div>
             </div>
             <div className="text-center">
               <h1 className="display-4 text-center">{profile.user.fn}</h1>
               <p>username: {profile.username}</p>
-              <p>Rating: {profile.rating}</p>
+              <p>
+                rating{" "}
+                <i
+                  className="icon ion-ios-star-outline"
+                  style={{ color: "gold", fontSize: "20px" }}
+                />
+                : {profile.rating}
+              </p>
               <p>Status: {profile.status}</p>
               <p>School: {profile.school}</p>
 

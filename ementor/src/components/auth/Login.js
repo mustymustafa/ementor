@@ -38,7 +38,10 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
+    const { user } = this.props.auth;
+    if (nextProps.auth.isAuthenticated && nextProps.auth.user.isTutor) {
+      this.props.history.push("/profile");
+    } else {
       this.props.history.push("/posts");
     }
 
@@ -50,50 +53,62 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="login">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Log In</h1>
-              <p className="lead text-center">
-                Sign in to your eMentor account
-              </p>
-              <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.email
-                    })}
-                    placeholder="Email Address"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.onChange}
-                  />
-                  {errors.email && (
-                    <div className="invalid-feedback">{errors.email}</div>
-                  )}
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.password
-                    })}
-                    placeholder="Password"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onChange}
-                  />
-                  {errors.password && (
-                    <div className="invalid-feedback">{errors.password}</div>
-                  )}
-                </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
-              </form>
-            </div>
+      <div className="login-clean">
+        <form onSubmit={this.onSubmit}>
+          <h2 className="sr-only">Login Form</h2>
+          <div className="illustration">
+            <i className="icon ion-log-in" style={{ color: "teal" }} />
           </div>
-        </div>
+          <div className="form-group">
+            <input
+              type="email"
+              className={classnames("form-control form-control-lg", {
+                "is-invalid": errors.email
+              })}
+              placeholder="Email Address"
+              name="email"
+              value={this.state.email}
+              onChange={this.onChange}
+            />
+          </div>
+          {errors.email && (
+            <div className="invalid-feedback">{errors.email}</div>
+          )}
+          <div className="form-group">
+            <input
+              type="password"
+              className={classnames("form-control form-control-lg", {
+                "is-invalid": errors.password
+              })}
+              placeholder="Password"
+              name="password"
+              value={this.state.password}
+              onChange={this.onChange}
+            />
+          </div>
+          {errors.password && (
+            <div className="invalid-feedback">{errors.password}</div>
+          )}
+          <div className="form-group">
+            <button
+              style={{ backgroundColor: "teal" }}
+              className="btn btn-primary btn-block"
+              type="submit"
+            >
+              Log In
+            </button>
+
+            <p style={{ fontSize: "12px", textAlign: "Center" }}>
+              or login with:
+            </p>
+          </div>
+          <a href="#">
+            <i className="fab fa-google" />
+          </a>
+          <a href="#" className="forgot">
+            Forgot your email or password?
+          </a>
+        </form>
       </div>
     );
   }

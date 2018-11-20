@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import NameBox from "./NameBox.js";
 import Chat from "twilio-chat";
 import Editor from "../Editor";
+import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class ChatApp extends Component {
   constructor(props) {
@@ -125,38 +128,61 @@ class ChatApp extends Component {
 
   render() {
     const { name } = this.props;
+    const { user } = this.props.auth;
+
+    const firstname = user.fn.trim().split(" ")[0];
     this.state.name = name;
 
     var loginOrChat;
     const messages = this.state.messages.map(message => {
       return (
         <li key={message.sid} ref={this.newMessageAdded}>
-          <b>{this.state.name}:</b>{" "}
+          <b>{firstname}</b>{" "}
           <div dangerouslySetInnerHTML={{ __html: message.body }} />
         </li>
       );
     });
     if (this.state.loggedIn) {
       loginOrChat = (
-        <div>
-          <h3>Messages</h3>
+        <div className="chatbox">
+          <div style={{ textAlign: "center" }}>
+            <h3>Messages</h3>
+          </div>
 
           <ul className="messages">{messages}</ul>
-          <form onSubmit={this.sendMessage}>
-            <label htmlFor="message">Message: </label>
+          <form onSubmit={this.sendMessage} style={{ minHeight: "300px" }}>
+            <label
+              className="chatlabel"
+              htmlFor="message"
+              style={{ textAlign: "center" }}
+            />
             <Editor
-              name="message"
+              name="newMessage"
               id="message"
               onChange={this.onMessageChanged}
               value={this.state.newMessage}
             />
 
-            <button>Send</button>
+            <Button
+              type="submit"
+              color="primary"
+              variant="outlined"
+              style={{ width: "100px" }}
+            >
+              send
+            </Button>
           </form>
           <br />
           <br />
-          <form onSubmit={this.logOut}>
-            <button>Close</button>
+          <form className="closebutton" onSubmit={this.logOut}>
+            <Button
+              type="submit"
+              color="secondary"
+              variant="outlined"
+              style={{ width: "100px" }}
+            >
+              close
+            </Button>
           </form>
         </div>
       );
@@ -171,4 +197,11 @@ class ChatApp extends Component {
   }
 }
 
-export default ChatApp;
+ChatApp.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(mapStateToProps)(ChatApp);

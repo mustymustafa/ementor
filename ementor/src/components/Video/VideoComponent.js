@@ -229,7 +229,7 @@ Connect to a room by providing the token and connection    options that include 
       </Button>
     );
     return (
-      <div>
+      <div className="videoRoom">
         <Grid container spacing={8}>
           <Grid item xs={8}>
             {showLocalTrack}

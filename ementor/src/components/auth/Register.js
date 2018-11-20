@@ -56,88 +56,95 @@ class Register extends Component {
 
     return (
       <div className="register">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <p className="lead text-center">
-                <h1>Create your eMentor account</h1>
-              </p>
-
-              <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.fn
-                    })}
-                    placeholder="Name"
-                    name="fn"
-                    value={this.state.fn}
-                    onChange={this.onChange}
-                  />
-
-                  {errors.fn && (
-                    <div className="invalid-feedback">{errors.fn}</div>
-                  )}
-                </div>
-
-                <div className="form-group">
-                  <select
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.school
-                    })}
-                    name="school"
-                    onChange={this.onChange}
-                    value={this.state.school}
-                  >
-                    <option value="0">* Select Your School</option>
-                    <option value="SITC">SITC</option>
-                    <option value="SAS">SAS</option>
-                    <option value="SBE">SBE</option>
-                    <option value="SOL">SOL</option>
-                  </select>
-                  {errors.school && (
-                    <div className="invalid-feedback">{errors.school}</div>
-                  )}
-                </div>
-
-                <div className="form-group">
-                  <input
-                    type="email"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.email
-                    })}
-                    placeholder="Email Address"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.onChange}
-                  />
-
-                  {errors.email && (
-                    <div className="invalid-feedback">{errors.email}</div>
-                  )}
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.password
-                    })}
-                    placeholder="Password"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onChange}
-                  />
-
-                  {errors.password && (
-                    <div className="invalid-feedback">{errors.password}</div>
-                  )}
-                </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
-              </form>
-            </div>
+        <form onSubmit={this.onSubmit}>
+          <div class="illustration">
+            <p style={{ fontSize: "25px", color: "teal" }}>
+              Create your eMentor account
+            </p>
           </div>
-        </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className={classnames("form-control form-control-lg", {
+                "is-invalid": errors.fn
+              })}
+              placeholder="Name"
+              name="fn"
+              value={this.state.fn}
+              onChange={this.onChange}
+            />
+
+            {errors.fn && <div className="invalid-feedback">{errors.fn}</div>}
+          </div>
+          <div className="form-group">
+            <input
+              type="email"
+              className={classnames("form-control form-control-lg", {
+                "is-invalid": errors.email
+              })}
+              placeholder="Email Address"
+              name="email"
+              value={this.state.email}
+              onChange={this.onChange}
+            />
+
+            {errors.email && (
+              <div className="invalid-feedback">{errors.email}</div>
+            )}
+          </div>
+          <div className="form-group">
+            <select
+              required
+              className={classnames("form-control form-control-lg", {
+                "is-invalid": errors.school
+              })}
+              name="school"
+              onChange={this.onChange}
+              value={this.state.school}
+            >
+              <option label="*Select your School" disabled />
+              <option value="SITC">SITC</option>
+              <option value="SAS">SAS</option>
+              <option value="SBE">SBE</option>
+              <option value="SOL">SOL</option>
+            </select>
+            {errors.school && (
+              <div className="invalid-feedback">{errors.school}</div>
+            )}
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              className={classnames("form-control form-control-lg", {
+                "is-invalid": errors.password
+              })}
+              placeholder="Password"
+              name="password"
+              value={this.state.password}
+              onChange={this.onChange}
+            />
+
+            {errors.password && (
+              <div className="invalid-feedback">{errors.password}</div>
+            )}
+          </div>
+          <div className="form-group">
+            <button
+              className="btn btn-primary btn-block"
+              type="submit"
+              style={{ backgroundColor: "teal" }}
+            >
+              Sign Up
+            </button>
+          </div>
+          <p style={{ fontSize: "12px", textAlign: "center" }}>
+            {" "}
+            or login with:
+          </p>
+          <a href="#" style={{ marginLeft: "100px" }}>
+            <i style={{ marginLeft: "100px" }} className="fab fa-google" />
+          </a>
+        </form>
       </div>
     );
   }

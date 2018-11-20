@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { deleteComment, addLike, removeLike } from "../../actions/postActions";
+import pp from "../../img/pp.png";
 
 class CommentItem extends Component {
   onDeleteClick(postId, commentId) {
@@ -35,7 +36,7 @@ class CommentItem extends Component {
             <a href="profile.html">
               <img
                 className="rounded-circle"
-                src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+                src={pp}
                 style={{ height: 100, width: 100 }}
                 alt=""
               />

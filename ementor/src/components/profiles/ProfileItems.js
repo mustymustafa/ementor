@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import pp from "../../img/pp.png";
 
 class ProfileItem extends Component {
   render() {
@@ -10,18 +11,21 @@ class ProfileItem extends Component {
       <div className="card card-body bg-light mb-3">
         <div className="row">
           <div className="col-2">
-            <img
-              src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-              alt=""
-              className="rounded-circle"
-            />
+            <img src={pp} alt="" className="rounded-circle" />
           </div>
           <div className="col-lg-6 col-md-4 col-8">
             <h3>{profile.user.fn}</h3>
             <p>{profile.status}</p>
             <p>{profile.school}</p>
 
-            <p>rating: {profile.rating}</p>
+            <p>
+              rating{" "}
+              <i
+                className="icon ion-ios-star-outline"
+                style={{ color: "gold", fontSize: "20px" }}
+              />
+              : {profile.rating}
+            </p>
             <a href={`/profile/${profile.username}`} className="btn btn-info">
               View Profile
             </a>

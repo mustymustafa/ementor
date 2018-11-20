@@ -14,11 +14,6 @@ class Navbar extends Component {
 
     const authUserLinks = (
       <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link className="nav-link" to="/profile">
-            BECOME A TUTOR
-          </Link>
-        </li>
         <li className="nav-item ">
           <Link className="nav-link" to="/posts">
             Posts
@@ -31,19 +26,27 @@ class Navbar extends Component {
           </Link>
         </li>
 
+        {user.isTutor ? (
+          <li className="nav-item">
+            <Link className="nav-link" to="/profile">
+              Profile
+            </Link>
+          </li>
+        ) : (
+          <li style={{ display: "none" }} className="nav-item">
+            <Link className="nav-link" to="/profiles">
+              Tutors
+            </Link>
+          </li>
+        )}
+
         <li className="nav-item">
           <a
             href="#"
             onClick={this.onLogoutClick.bind(this)}
             className="nav-link"
           >
-            <img
-              className="rounded-circle"
-              src="https://www.gravatar.com/avatar/anything?s=200&d=mm"
-              style={{ width: "25px", marginRight: "5px" }}
-              alt=""
-            />
-            LOG OUT
+            Log Out <i className="icon ion-log-out" />
           </a>
         </li>
       </ul>
@@ -51,17 +54,18 @@ class Navbar extends Component {
 
     const guestLinks = (
       <ul className="navbar-nav ml-auto">
-        <li className="nav-item ">
-          <Link className="nav-link" to="/posts">
-            Posts
-          </Link>
-        </li>
-
         <li className="nav-item">
           <Link className="nav-link" to="/register">
             SIGN UP
           </Link>
         </li>
+
+        <li className="nav-item">
+          <Link className="nav-link" to="/registerT">
+            BECOME A TUTOR
+          </Link>
+        </li>
+
         <li className="nav-item">
           <Link className="nav-link" to="/login">
             LOGIN
@@ -89,6 +93,7 @@ class Navbar extends Component {
             <ul className="navbar-nav mr-auto">
               <li className="nav-item" />
             </ul>
+
             {isAuthenticated ? authUserLinks : guestLinks}
           </div>
         </div>

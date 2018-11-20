@@ -10,6 +10,10 @@ var styles = {
 class Landing extends Component {
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/posts");
+    }
+
+    if(this.props.auth.isTutor){
       this.props.history.push("/profile");
     }
   }

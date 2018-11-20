@@ -19,6 +19,22 @@ export const registerUser = (userData, history) => dispatch => {
     );
 };
 
+//register user
+export const registerTutor = (tutorData, history) => dispatch => {
+  axios({
+    method: "post",
+    url: "/register",
+    data: tutorData
+  })
+    .then(res => history.push("/profile"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 //login User - GET USER TOKEN
 export const loginUser = userData => dispatch => {
   axios({
@@ -62,5 +78,5 @@ export const logoutUser = () => dispatch => {
   //remove auth header for future request
   setAuthToken(false);
   //set current user to {} which auth will be false
-  dispatch(setCurrentUser({}));
+  dispatch(setCurrentUser({}), window.location.assign("/"));
 };

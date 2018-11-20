@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import { Link } from "react-router-dom";
 import { deletePost } from "../../actions/postActions";
+import pp from "../../img/pp.png";
 
 class PostItem extends Component {
   onDeleteClick = id => {
@@ -20,7 +21,7 @@ class PostItem extends Component {
               <a href="profile.html">
                 <img
                   className="rounded-circle"
-                  src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+                  src={pp}
                   style={{ height: 100, width: 100 }}
                   alt=""
                 />

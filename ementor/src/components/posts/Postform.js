@@ -25,6 +25,8 @@ class Postform extends Component {
     this.setState({ text: html });
   };
 
+  
+
   onCategory = e => {
     this.setState({ category: e.target.value });
   };
@@ -83,6 +85,7 @@ class Postform extends Component {
 
                   <div className="col-6">
                     <select
+                      required
                       style={selectStyle}
                       className="form-control float-right"
                       id="category"
