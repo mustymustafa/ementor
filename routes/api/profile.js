@@ -171,9 +171,56 @@ nodemailer.createTestAccount((err, account) => {
   );
 
   //get all profiles
-  router.get("/all", (req, res) => {
+
+  //get sitc profiles
+  router.get("/sitc", (req, res) => {
     const errors = {};
-    Profile.find()
+    Profile.find({ school: "SITC" })
+      .populate("user", ["fn", "email"])
+      .sort({ rating: -1 })
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = "there are no users here";
+          return res.status(404).json(errors);
+        }
+        res.json(profile);
+      })
+      .catch(err => res.status(404).json({ profile: "there are no users" }));
+  });
+
+  router.get("/sas", (req, res) => {
+    const errors = {};
+    Profile.find({ school: "SAS" })
+      .populate("user", ["fn", "email"])
+      .sort({ rating: -1 })
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = "there are no users here";
+          return res.status(404).json(errors);
+        }
+        res.json(profile);
+      })
+      .catch(err => res.status(404).json({ profile: "there are no users" }));
+  });
+
+  router.get("/sbe", (req, res) => {
+    const errors = {};
+    Profile.find({ school: "SBE" })
+      .populate("user", ["fn", "email"])
+      .sort({ rating: -1 })
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = "there are no users here";
+          return res.status(404).json(errors);
+        }
+        res.json(profile);
+      })
+      .catch(err => res.status(404).json({ profile: "there are no users" }));
+  });
+
+  router.get("/sol", (req, res) => {
+    const errors = {};
+    Profile.find({ school: "SOL" })
       .populate("user", ["fn", "email"])
       .sort({ rating: -1 })
       .then(profile => {
@@ -415,10 +462,8 @@ router.post("/invite", (req, res) => {
   const email = req.body.invite;
   const link = req.body.link;
 
-  
   console.log(email);
   console.log(link);
-
 
   //send email here
 });

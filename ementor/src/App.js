@@ -21,7 +21,11 @@ import store from "./store";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/profileActions/CreateProfile";
 import Profile from "./components/profileActions/Profile";
+
 import Profiles from "./components/profiles/Profiles";
+import SasProfile from "./components/profiles/Profiles.1";
+import SbeProfile from "./components/profiles/Profiles.2";
+import SolProfile from "./components/profiles/Profiles.3";
 import Username from "./components/profiles/Username";
 
 import PrivateRoute from "./components/common/private Route/PrivateRoute";
@@ -66,6 +70,9 @@ class App extends Component {
               <Route exact path="/registerT" component={RegisterT} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
+              <Route exact path="/sasprofiles" component={SasProfile} />
+              <Route exact path="/sbeprofiles" component={SbeProfile} />
+              <Route exact path="/solprofiles" component={SolProfile} />
               <PrivateRoute
                 exact
                 path="/profile/:username"

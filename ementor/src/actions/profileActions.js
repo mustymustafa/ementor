@@ -30,10 +30,64 @@ export const getCurrentProfile = () => dispatch => {
 
 //get PROFILES
 
-export const getProfiles = () => dispatch => {
+export const getSitcProfiles = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get("/profile/all")
+    .get("/profile/sitc")
+    .then(res =>
+      dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILES,
+        payload: null
+      })
+    );
+};
+
+export const getSasProfiles = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get("/profile/sas")
+    .then(res =>
+      dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILES,
+        payload: null
+      })
+    );
+};
+
+export const getSbeProfiles = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get("/profile/sbe")
+    .then(res =>
+      dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILES,
+        payload: null
+      })
+    );
+};
+
+export const getSolProfiles = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get("/profile/sol")
     .then(res =>
       dispatch({
         type: GET_PROFILES,

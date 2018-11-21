@@ -12,7 +12,7 @@ import ProfileItems from "./ProfileItems";
 
 class Profiles extends Component {
   componentDidMount() {
-    this.props.getSitcProfiles();
+    this.props.getSolProfiles();
   }
   render() {
     const { profiles, loading } = this.props.profile;
@@ -69,7 +69,7 @@ class Profiles extends Component {
 }
 
 Profiles.propTypes = {
-  getSitcProfiles: PropTypes.func.isRequired,
+  getSolProfiles: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 
@@ -79,5 +79,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getSitcProfiles }
+  { getSolProfiles }
 )(Profiles);
