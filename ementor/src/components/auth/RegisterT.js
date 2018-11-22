@@ -62,7 +62,7 @@ class RegisterT extends Component {
       <div className="register">
         <form onSubmit={this.onSubmit}>
           <div class="illustration">
-            <p style={{ fontSize: "25px", color: "teal" }}>
+            <p style={{ fontSize: "25px", color: "white" }}>
               Create your Tutor account
             </p>
           </div>
@@ -134,9 +134,9 @@ class RegisterT extends Component {
           </div>
           <div className="form-group">
             <button
-              className="btn btn-primary btn-block"
+              className="btn  btn-block"
               type="submit"
-              style={{ backgroundColor: "teal" }}
+              style={{ backgroundColor: "#5699e2", color: "white" }}
             >
               Sign Up
             </button>
@@ -145,8 +145,14 @@ class RegisterT extends Component {
             {" "}
             or login with:
           </p>
-          <a href="#" style={{ marginLeft: "100px" }}>
-            <i style={{ marginLeft: "100px" }} className="fab fa-google" />
+          <a href="#">
+            <button
+              style={{ backgroundColor: "red", color: "white" }}
+              className="btn  btn-block"
+              type="submit"
+            >
+              Log In with <i className="fab fa-google" />
+            </button>
           </a>
         </form>
       </div>

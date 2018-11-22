@@ -9,11 +9,10 @@ img {
   background-position: center;
   height: 100vh;
   margin-top: -24px;
-  margin-bottom: -50px;
 }
 
 .landing-inner {
-  padding-top: 80px;
+  padding-top: 150px;
 }
 
 .dark-overlay {
@@ -44,9 +43,14 @@ img {
   background: #fefcfc;
 }
 
+.container {
+  padding-top: 15px;
+}
+
 .ql-toolbar.ql-snow + .ql-container.ql-snow {
   border-top: 0px;
-  width: 400px;
+
+  min-width: 0;
 }
 
 /* Snow Theme */
@@ -55,7 +59,8 @@ img {
   background: #eaecec;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
-  width: 400px;
+
+  min-width: 0;
 }
 
 .ql-editor {
@@ -68,35 +73,34 @@ img {
 }
 
 .login-clean {
-  background: #f1f7fc;
   padding: 80px 0;
+  margin-top: 2%;
 }
 
 .register {
-  background: #f1f7fc;
   padding: 80px 0;
+  margin-top: 2%;
 }
 
 .register form {
   max-width: 500px;
   width: 90%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background: rgb(121, 116, 116);
   padding: 40px;
   border-radius: 4px;
-  color: #505e6c;
-  margin-top: 5%;
+  color: white;
+  margin-top: 2%;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .login-clean form {
-  max-width: 320px;
-  width: 90%;
+  width: 500px;
   margin: 0 auto;
-  background-color: #ffffff;
-  padding: 40px;
+  background: rgb(121, 116, 116);
+  padding: 80px;
   border-radius: 4px;
-  color: #505e6c;
+  color: black;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -150,7 +154,7 @@ img {
   display: block;
   text-align: center;
   font-size: 12px;
-  color: #6f7a85;
+  color: black;
   opacity: 0.9;
   text-decoration: none;
 }
@@ -162,13 +166,11 @@ img {
 }
 
 .fa-google {
-  background-color: white;
-  color: red;
+  color: white;
   border: 1px solid;
   border-radius: 50%;
   padding: 8px;
   border-color: red;
-  margin-left: 100px;
 }
 
 .login-clean {
@@ -182,40 +184,67 @@ img {
 .videoRoom {
   height: 100vh;
 }
+.btn-info {
+  background-color: #5699e2 !important;
+}
 
-.btn .btn-info {
-  background-color: blue;
+.btn-lg .btn-info {
+  background-color: #5699e2 !important;
 }
 
 .bg-info {
-  background-color: blue;
+  background-color: #5699e2 !important;
 }
 
 .chatbox {
   border: 2px solid;
   padding-left: 50px;
+  padding-right: 50px;
   width: 500px;
   min-height: 500px;
 }
 
 .closebutton {
   float: right;
-  margin-top: -88px;
-  padding-right: 47px;
+  margin-top: -87px;
+  padding-right: 0;
 }
 
-.tablink {
-  background-color: #555;
+.nav-link:hover {
+  background-color: white;
+}
+
+nav {
+  background: #343a40 !important;
+  padding: 20px;
+
+  border-bottom: 10%;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-light .navbar-brand {
   color: white;
   float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 17px;
-  width: 25%;
+  font-weight: bold;
 }
 
-.tablink:hover {
-  background-color: #777;
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+  padding: 20px;
+}
+
+.navbar-light .navbar-toggler {
+  background: white;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem !important;
+}
+
+a:hover {
+  text-decoration-line: none;
+}
+
+a:active a:active {
+  color: white;
 }

@@ -46,7 +46,7 @@ class Navbar extends Component {
             onClick={this.onLogoutClick.bind(this)}
             className="nav-link"
           >
-            Log Out <i className="icon ion-log-out" />
+            Log Out <i className="fas fa-sign-out-alt" />
           </a>
         </li>
       </ul>
@@ -75,25 +75,20 @@ class Navbar extends Component {
     );
 
     return (
-      <nav className="navbar sticky-top navbar-expand navbar-dark bg-dark mb-4">
+      <nav className="navbar sticky-top navbar-light navbar-expand-md navigation-clean-button mb4">
         <div className="container">
-          <Link className="navbar-brand" to="/">
+          <a className="navbar-brand" href="/">
             eMentor
-          </Link>
+          </a>
           <button
             className="navbar-toggler"
-            type="button"
             data-toggle="collapse"
-            data-target="#mobile-nav"
+            data-target="#navcol-1"
           >
+            <span className="sr-only">Toggle navigation</span>
             <span className="navbar-toggler-icon" />
           </button>
-
-          <div className="collapse navbar-collapse" id="mobile-nav">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item" />
-            </ul>
-
+          <div className="collapse navbar-collapse" id="navcol-1">
             {isAuthenticated ? authUserLinks : guestLinks}
           </div>
         </div>

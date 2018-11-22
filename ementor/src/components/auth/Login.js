@@ -57,7 +57,7 @@ class Login extends Component {
         <form onSubmit={this.onSubmit}>
           <h2 className="sr-only">Login Form</h2>
           <div className="illustration">
-            <i className="icon ion-log-in" style={{ color: "teal" }} />
+            <i className="fas fa-sign-in-alt" style={{ color: "#5699e2" }} />
           </div>
           <div className="form-group">
             <input
@@ -91,22 +91,22 @@ class Login extends Component {
           )}
           <div className="form-group">
             <button
-              style={{ backgroundColor: "teal" }}
+              style={{ backgroundColor: "#5699e2" }}
               className="btn btn-primary btn-block"
               type="submit"
             >
               Log In
             </button>
-
-            <p style={{ fontSize: "12px", textAlign: "Center" }}>
-              or login with:
-            </p>
           </div>
+
           <a href="#">
-            <i className="fab fa-google" />
-          </a>
-          <a href="#" className="forgot">
-            Forgot your email or password?
+            <button
+              style={{ backgroundColor: "red" }}
+              className="btn btn-primary btn-block"
+              type="submit"
+            >
+              Log In with <i className="fab fa-google" />
+            </button>
           </a>
         </form>
       </div>

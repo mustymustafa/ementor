@@ -56,9 +56,9 @@ class Register extends Component {
 
     return (
       <div className="register">
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit} style={{ color: "white" }}>
           <div class="illustration">
-            <p style={{ fontSize: "25px", color: "teal" }}>
+            <p style={{ fontSize: "25px", color: "white" }}>
               Create your eMentor account
             </p>
           </div>
@@ -130,9 +130,9 @@ class Register extends Component {
           </div>
           <div className="form-group">
             <button
-              className="btn btn-primary btn-block"
+              className="btn  btn-block"
               type="submit"
-              style={{ backgroundColor: "teal" }}
+              style={{ backgroundColor: "#5699e2", color: "white" }}
             >
               Sign Up
             </button>
@@ -141,8 +141,14 @@ class Register extends Component {
             {" "}
             or login with:
           </p>
-          <a href="#" style={{ marginLeft: "100px" }}>
-            <i style={{ marginLeft: "100px" }} className="fab fa-google" />
+          <a href="#">
+            <button
+              style={{ backgroundColor: "red", color: "white", padding: "5px" }}
+              className="btn  btn-block"
+              type="submit"
+            >
+              Log In with <i className="fab fa-google" />
+            </button>
           </a>
         </form>
       </div>
