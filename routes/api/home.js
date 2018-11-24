@@ -117,8 +117,9 @@ nodemailer.createTestAccount((err, account) => {
     User.findOne({ email }).then(user => {
       // Check for user
       if (!user) {
-        errors.email = "User not found";
+        errors.email = "email is incorrect";
         return res.status(404).json(errors);
+        
       }
 
       // Check Password

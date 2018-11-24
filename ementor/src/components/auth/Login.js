@@ -74,10 +74,11 @@ class Login extends Component {
               value={user.email}
               onChange={this.onChange}
             />
+            {errors.email && (
+              <div className="invalid-feedback">{errors.email}</div>
+            )}
           </div>
-          {errors.email && (
-            <div className="invalid-feedback">{errors.email}</div>
-          )}
+
           <div className="form-group">
             <input
               type="password"
@@ -89,10 +90,11 @@ class Login extends Component {
               value={user.password}
               onChange={this.onChange}
             />
+            {errors.password && (
+              <div className="invalid-feedback">{errors.password}</div>
+            )}
           </div>
-          {errors.password && (
-            <div className="invalid-feedback">{errors.password}</div>
-          )}
+
           <div className="form-group">
             <button
               style={{ backgroundColor: "#5699e2" }}
