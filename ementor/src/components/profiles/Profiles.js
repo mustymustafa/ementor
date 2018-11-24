@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Spinner from "../../components/common/spinner/Spinner";
-import {
-  getSitcProfiles,
-  getSasProfiles,
-  getSbeProfiles,
-  getSolProfiles
-} from "../../actions/profileActions";
+import { getSitcProfiles } from "../../actions/profileActions";
 import ProfileItems from "./ProfileItems";
 
 class Profiles extends Component {

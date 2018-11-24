@@ -39,10 +39,13 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { user } = this.props.auth;
+
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/posts");
+    }
+
     if (nextProps.auth.isAuthenticated && nextProps.auth.user.isTutor) {
       this.props.history.push("/profile");
-    } else {
-      this.props.history.push("/posts");
     }
 
     if (nextProps.errors) {
@@ -52,6 +55,7 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state;
+    const { user } = this.props.auth;
     return (
       <div className="login-clean">
         <form onSubmit={this.onSubmit}>
@@ -67,7 +71,7 @@ class Login extends Component {
               })}
               placeholder="Email Address"
               name="email"
-              value={this.state.email}
+              value={user.email}
               onChange={this.onChange}
             />
           </div>
@@ -82,7 +86,7 @@ class Login extends Component {
               })}
               placeholder="Password"
               name="password"
-              value={this.state.password}
+              value={user.password}
               onChange={this.onChange}
             />
           </div>
@@ -98,16 +102,6 @@ class Login extends Component {
               Log In
             </button>
           </div>
-
-          <a href="#">
-            <button
-              style={{ backgroundColor: "red" }}
-              className="btn btn-primary btn-block"
-              type="submit"
-            >
-              Log In with <i className="fab fa-google" />
-            </button>
-          </a>
         </form>
       </div>
     );

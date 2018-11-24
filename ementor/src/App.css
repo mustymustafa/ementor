@@ -84,6 +84,7 @@ img {
 
 .register form {
   max-width: 500px;
+  min-width: 200px;
   width: 90%;
   margin: 0 auto;
   background: rgb(121, 116, 116);
@@ -95,7 +96,8 @@ img {
 }
 
 .login-clean form {
-  width: 500px;
+  min-width: 200px;
+  max-width: 500px;
   margin: 0 auto;
   background: rgb(121, 116, 116);
   padding: 80px;
@@ -200,7 +202,7 @@ img {
   border: 2px solid;
   padding-left: 50px;
   padding-right: 50px;
-  width: 500px;
+  width: 800px;
   min-height: 500px;
 }
 

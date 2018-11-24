@@ -5,12 +5,16 @@ import jwt_decode from "jwt-decode";
 
 //register user
 export const registerUser = (userData, history) => dispatch => {
+  const data = {
+    email: userData.email,
+    password: userData.password
+  };
   axios({
     method: "post",
     url: "/register",
     data: userData
   })
-    .then(res => history.push("/login"))
+    .then(res => history.push("/login"), loginUser(data))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -18,23 +22,6 @@ export const registerUser = (userData, history) => dispatch => {
       })
     );
 };
-
-//register user
-export const registerTutor = (tutorData, history) => dispatch => {
-  axios({
-    method: "post",
-    url: "/register",
-    data: tutorData
-  })
-    .then(res => history.push("/profile"))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
-
 //login User - GET USER TOKEN
 export const loginUser = userData => dispatch => {
   axios({

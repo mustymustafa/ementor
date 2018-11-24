@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../common/spinner/Spinner";
 
-import rating from "../rating/rating";
-
 import DashboardHeader from "../dashboard/DashboardHeader";
 import DashboardBody from "../dashboard/DashboardBody";
 import {

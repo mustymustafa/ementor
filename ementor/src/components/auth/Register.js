@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import { connect } from "react-redux";
-import { registerUser } from "../../actions/authActions";
+import { registerUser, loginUser } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
 
 class Register extends Component {
@@ -33,12 +33,21 @@ class Register extends Component {
       password: this.state.password
     };
 
+    const userData = {
+      email: this.state.email,
+
+      password: this.state.password
+    };
+
     this.props.registerUser(newUser, this.props.history);
+
+    this.props.loginUser(userData);
+    this.props.history.push("/login");
   };
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/home");
+      this.props.history.push("/posts");
     }
   }
 
@@ -57,7 +66,7 @@ class Register extends Component {
     return (
       <div className="register">
         <form onSubmit={this.onSubmit} style={{ color: "white" }}>
-          <div class="illustration">
+          <div className="illustration">
             <p style={{ fontSize: "25px", color: "white" }}>
               Create your eMentor account
             </p>
@@ -137,19 +146,6 @@ class Register extends Component {
               Sign Up
             </button>
           </div>
-          <p style={{ fontSize: "12px", textAlign: "center" }}>
-            {" "}
-            or login with:
-          </p>
-          <a href="#">
-            <button
-              style={{ backgroundColor: "red", color: "white", padding: "5px" }}
-              className="btn  btn-block"
-              type="submit"
-            >
-              Log In with <i className="fab fa-google" />
-            </button>
-          </a>
         </form>
       </div>
     );
@@ -170,5 +166,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerUser }
+  { registerUser, loginUser }
 )(withRouter(Register));

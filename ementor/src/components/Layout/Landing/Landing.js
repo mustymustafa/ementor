@@ -37,8 +37,8 @@ class Landing extends Component {
                       from tutors
                     </p>
                     <hr />
-                    <Link to="/registerT" className="btn btn-lg btn-info mr-2">
-                      Sign Up As a Tutor
+                    <Link to="/register" className="btn btn-lg btn-info mr-2">
+                      Sign Up
                     </Link>
                     <Link to="/login" className="btn btn-lg btn-light">
                       Login

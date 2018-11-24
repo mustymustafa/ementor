@@ -7,6 +7,7 @@ import {
   GET_ERRORS,
   GET_PROFILES
 } from "./types";
+import { logoutUser } from "./authActions";
 
 //get current profile
 
@@ -124,7 +125,8 @@ export const getProfileByUsername = username => dispatch => {
 export const createProfile = (profileData, history) => dispatch => {
   axios
     .post("/profile", profileData)
-    .then(res => history.push("/profile"))
+    .then(logoutUser())
+
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

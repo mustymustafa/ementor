@@ -10,8 +10,7 @@ var UserSchema = new mongoose.Schema({
   },
 
   school: {
-    type: String,
-    required: true
+    type: String
   },
 
   isTutor: {
@@ -26,8 +25,6 @@ var UserSchema = new mongoose.Schema({
     unique: true,
     lowercase: true
   },
-
-  googleId: String,
 
   password: {
     type: String

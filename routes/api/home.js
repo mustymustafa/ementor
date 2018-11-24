@@ -170,62 +170,6 @@ nodemailer.createTestAccount((err, account) => {
     })
   );
 
-  //google strategy
-
-  passport.use(
-    new GoogleStrategy(
-      {
-        clientID: configAuth.googleAuth.clientID,
-        clientSecret: configAuth.googleAuth.clientSecret,
-        callbackURL: "/auth/google/callback"
-      },
-      (accessToken, refreshToken, profile, done) => {
-        //make the code asynchronous
-        //User.findOne won't fire until we have all our data from google
-        //this function should be called immediately in thee next event loop
-        console.log(profile);
-        process.nextTick(function() {
-          //finding the user based on their google id
-          User.findOne({ googleId: profile.id }, function(err, user) {
-            if (err) return done(err);
-            if (user) {
-              console.log(user.username + " Already exists");
-              done(null, user);
-            } else {
-              new User({
-                //fn: profile.name,
-                username: profile.displayName,
-                googleId: profile.id
-                //profileImage: profile.image
-              })
-                .save()
-                .then(newUser => {
-                  console.log(newUser);
-                });
-            }
-          });
-        });
-      }
-    )
-  );
-
-  router.get(
-    "/auth/google",
-    passport.authenticate("google", {
-      scope: ["profile", "email"]
-    })
-  );
-
-  //callback after google has authenticated
-  router.get(
-    "/auth/google/callback",
-
-    passport.authenticate("google", {
-      successRedirect: "/",
-      failureRedirect: "/register"
-    })
-  );
-
   //password reset for users
 
   router.get("/forgot", function(req, res) {

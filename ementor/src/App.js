@@ -12,7 +12,7 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { clearCurrentProfile } from "./actions/profileActions";
 
 import Register from "./components/auth/Register";
-import RegisterT from "./components/auth/RegisterT";
+
 import Login from "./components/auth/Login";
 
 import { Provider } from "react-redux";
@@ -67,22 +67,21 @@ class App extends Component {
 
             <div className="container">
               <Route exact path="/register" component={Register} />
-              <Route exact path="/registerT" component={RegisterT} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/sasprofiles" component={SasProfile} />
               <Route exact path="/sbeprofiles" component={SbeProfile} />
               <Route exact path="/solprofiles" component={SolProfile} />
-              <PrivateRoute
-                exact
-                path="/profile/:username"
-                component={Username}
-              />
               <Route exact path="/posts" component={Posts} />
               <Switch>
                 {" "}
                 <PrivateRoute exact path="/profile" component={Dashboard} />
               </Switch>
+              <PrivateRoute
+                exact
+                path="/profile/:username"
+                component={Username}
+              />
               <Switch>
                 {" "}
                 <PrivateRoute

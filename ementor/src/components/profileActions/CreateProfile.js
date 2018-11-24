@@ -50,6 +50,8 @@ class CreateProfile extends Component {
     };
 
     this.props.createProfile(profileData, this.props.history);
+
+    window.location.assign("/login");
   };
 
   onChange = e => {
@@ -318,7 +320,9 @@ class CreateProfile extends Component {
                 </div>
                 {socialInputs}
 
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <button type="submit" className="btn btn-info btn-block mt-4">
+                  Submit
+                </button>
               </form>
             </div>
           </div>

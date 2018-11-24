@@ -9,34 +9,49 @@ class Navbar extends Component {
     e.preventDefault();
     this.props.logoutUser();
   }
+
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
     const authUserLinks = (
       <ul className="navbar-nav ml-auto">
+        {user.isTutor ? (
+          <li style={{ display: "none" }} className="nav-item ">
+            <a className="nav-link" href="/profile">
+              BECOME A TUTOR
+            </a>
+          </li>
+        ) : (
+          <li className="nav-item">
+            <a className="nav-link" href="/profile">
+              BECOME A TUTOR
+            </a>
+          </li>
+        )}
+
         <li className="nav-item ">
-          <Link className="nav-link" to="/posts">
+          <a className="nav-link" href="/posts">
             Posts
-          </Link>
+          </a>
         </li>
 
         <li className="nav-item">
-          <Link className="nav-link" to="/profiles">
+          <a className="nav-link" href="/profiles">
             Tutors
-          </Link>
+          </a>
         </li>
 
         {user.isTutor ? (
           <li className="nav-item">
-            <Link className="nav-link" to="/profile">
+            <a className="nav-link" href="/profile">
               Profile
-            </Link>
+            </a>
           </li>
         ) : (
           <li style={{ display: "none" }} className="nav-item">
-            <Link className="nav-link" to="/profiles">
+            <a className="nav-link" href="/profiles">
               Tutors
-            </Link>
+            </a>
           </li>
         )}
 
@@ -57,12 +72,6 @@ class Navbar extends Component {
         <li className="nav-item">
           <Link className="nav-link" to="/register">
             SIGN UP
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link className="nav-link" to="/registerT">
-            BECOME A TUTOR
           </Link>
         </li>
 
