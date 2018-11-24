@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { createProfile } from "../../actions/profileActions";
+import { logoutUser } from "../../actions/authActions";
 import classnames from "classnames";
 
 class CreateProfile extends Component {
@@ -50,8 +51,7 @@ class CreateProfile extends Component {
     };
 
     this.props.createProfile(profileData, this.props.history);
-
-    window.location.assign("/login");
+    this.props.history.push("/login");
   };
 
   onChange = e => {
@@ -190,7 +190,6 @@ class CreateProfile extends Component {
                     later)
                   </small>
                 </div>
-
                 <div className="form-group">
                   <select
                     className={classnames("form-control form-control-lg", {
@@ -212,7 +211,6 @@ class CreateProfile extends Component {
                     <div className="invalid-feedback">{errors.status}</div>
                   )}
                 </div>
-
                 <div className="form-group">
                   <select
                     className={classnames("form-control form-control-lg", {
@@ -232,7 +230,6 @@ class CreateProfile extends Component {
                     <div className="invalid-feedback">{errors.school}</div>
                   )}
                 </div>
-
                 <div className="form-group">
                   <input
                     type="text"
@@ -246,7 +243,6 @@ class CreateProfile extends Component {
                     Your Office Location e.g AS 101, HS OR BB 102 (OPTIONAL)
                   </small>
                 </div>
-
                 <div className="form-group">
                   <input
                     type="text"
@@ -270,7 +266,6 @@ class CreateProfile extends Component {
                     </div>
                   )}
                 </div>
-
                 <div className="form-group">
                   <input
                     type="text"
@@ -290,7 +285,6 @@ class CreateProfile extends Component {
                     <div className="invalid-feedback">{errors.skills}</div>
                   )}
                 </div>
-
                 <div className="form-group">
                   <textarea
                     className="form-control form-control-lg"
@@ -303,7 +297,6 @@ class CreateProfile extends Component {
                     Tell us a little about yourself
                   </small>
                 </div>
-
                 <div className="mb-3">
                   <button
                     type="button"
@@ -319,10 +312,7 @@ class CreateProfile extends Component {
                   <span className="text-muted">Optional</span>
                 </div>
                 {socialInputs}
-
-                <button type="submit" className="btn btn-info btn-block mt-4">
-                  Submit
-                </button>
+                <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
           </div>
@@ -344,5 +334,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile }
+  { createProfile, logoutUser }
 )(withRouter(CreateProfile));
