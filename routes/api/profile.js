@@ -277,6 +277,8 @@ nodemailer.createTestAccount((err, account) => {
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const errors = {};
+      const time = new Date().getHours();
+      console.log(time);
       Profile.findOne({ username: req.params.username })
         .populate("user", ["fn", "email"])
         .then(profile => {
@@ -303,9 +305,6 @@ nodemailer.createTestAccount((err, account) => {
                   console.log("time is" + ah.time);
                   ah.user = req.user.id;
 
-                  //save the schema
-                  profile.save().then(profile => res.json(profile));
-
                   var mailOptions = {
                     from: "eMentor <musty.mohammed1998@gmail.com>", // sender address
                     to: profile.user.email, // list of receivers
@@ -328,6 +327,11 @@ nodemailer.createTestAccount((err, account) => {
                     }
                   });
                 }
+
+                //save the schema
+                profile.save().then(profile => {
+                  res.json(profile);
+                });
               }
             });
           }
@@ -433,39 +437,68 @@ nodemailer.createTestAccount((err, account) => {
     console.log(token.toJwt());
   });
 
-  //end of nodemailer
-});
+  //rating
 
-//rating
+  router.post("/:username/vote", (req, res) => {
+    Profile.findOne({ username: req.params.username }).then(profile => {
+      console.log(profile);
+      console.log(req.body.votes);
 
-router.post("/:username/vote", (req, res) => {
-  Profile.findOne({ username: req.params.username }).then(profile => {
-    console.log(profile);
-    console.log(req.body.votes);
+      const votes = req.body.votes;
 
-    const votes = req.body.votes;
+      profile.ratings.push(votes);
 
-    profile.ratings.push(votes);
+      console.log(profile.ratings);
+      const total = rating(profile.ratings);
 
-    console.log(profile.ratings);
-    const total = rating(profile.ratings);
+      profile.rating = total;
 
-    profile.rating = total;
-
-    profile.save().then(voted => console.log(total));
+      profile.save().then(voted => console.log(total));
+    });
   });
-});
 
-//invite route
+  //invite route
 
-router.post("/invite", (req, res) => {
-  const email = req.body.invite;
-  const link = req.body.link;
+  router.post("/invite", (req, res) => {
+    const email = req.body.invite;
+    const link = req.body.link;
 
-  console.log(email);
-  console.log(link);
+    console.log(email);
+    console.log(link);
 
-  //send email here
+    //send email here
+  });
+
+  //contact tutor
+
+  router.post("/:username/contact", (req, res) => {
+    const message = req.body.message;
+    Profile.findOne({ username: req.params.username })
+      .populate("user", ["fn", "email"])
+      .then(profile => {
+        console.log(profile.user.email);
+        const mail = profile.user.email;
+
+        var mailOptions = {
+          from: "eMentor <musty.mohammed1998@gmail.com>", // sender address
+          to: mail, // list of receivers
+          subject: "New Direct Message", // Subject line
+          // text: "",
+          html: message
+        };
+
+        // send mail with defined transport object
+        smtpTransport.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            return console.log(error);
+          } else {
+            console.log("Message sent: %s", info.messageId);
+          }
+        });
+      });
+  });
+
+  //end of nodemailer
 });
 
 module.exports = router;

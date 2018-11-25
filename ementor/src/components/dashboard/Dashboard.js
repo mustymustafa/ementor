@@ -10,6 +10,7 @@ import { addPost } from "../../actions/postActions";
 import classnames from "classnames";
 import axios from "axios";
 class Dashboard extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -104,6 +105,7 @@ class Dashboard extends Component {
                         >
                           Create Session
                         </button>
+
 
                         <div class="modal fade" id="myModal" role="dialog">
                           <div class="modal-dialog modal-sm">

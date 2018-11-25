@@ -57,11 +57,11 @@ class Login extends Component {
           </div>
           <div className="form-group">
             <input
+              placeholder="email@aun.edu.ng"
               type="email"
               className={classnames("form-control form-control-lg", {
                 "is-invalid": errors.email
               })}
-              placeholder="Email Address"
               name="email"
               value={user.email}
               onChange={this.onChange}

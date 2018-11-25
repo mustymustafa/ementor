@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import isEmpty from "../../validation/is-empty";
 import pp from "../../img/pp.png";
+import axios from "axios";
+
+import { Offline, Online } from "react-detect-offline";
 
 class DashboardHeader extends Component {
   render() {
@@ -20,7 +23,7 @@ class DashboardHeader extends Component {
             </div>
             <div className="text-center">
               <h1 className="display-4 text-center">{profile.user.fn}</h1>
-              <p>username: {profile.username}</p>
+
               <p>
                 rating{" "}
                 <i
@@ -80,6 +83,12 @@ class DashboardHeader extends Component {
                 )}
               </p>
             </div>
+            <Online>
+              Online <i class="fas fa-circle" style={{ color: "green" }} />
+            </Online>
+            <Offline>
+              Offline <i class="fas fa-circle" style={{ color: "black" }} />
+            </Offline>
           </div>
         </div>
       </div>

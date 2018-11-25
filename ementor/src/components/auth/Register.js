@@ -91,10 +91,12 @@ class Register extends Component {
               className={classnames("form-control form-control-lg", {
                 "is-invalid": errors.email
               })}
-              placeholder="Email Address"
+              placeholder="email@aun.edu.ng"
               name="email"
               value={this.state.email}
               onChange={this.onChange}
+              pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(aun)\.edu\.ng$"
+              title="please enter an aun email"
             />
 
             {errors.email && (
