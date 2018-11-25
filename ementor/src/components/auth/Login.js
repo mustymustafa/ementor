@@ -65,6 +65,8 @@ class Login extends Component {
               name="email"
               value={user.email}
               onChange={this.onChange}
+              pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(aun)\.edu\.ng$"
+              title="please enter an aun email"
             />
             {errors.email && (
               <div className="invalid-feedback">{errors.email}</div>
