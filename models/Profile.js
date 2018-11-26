@@ -77,13 +77,5 @@ const profileSchema = new Schema({
 
 const Profile = (module.exports = mongoose.model("profile", profileSchema));
 
-profileSchema.post("remove", function(next) {
-  profile.availablehours.map(ah => {
-    const newDay = new Date();
-    newDay.setHours(0, 38, 0, 0);
-    if (newDay) {
-      ah.user = null;
-    }
-  });
-  profileSchema.save();
-});
+
+

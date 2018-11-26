@@ -277,8 +277,7 @@ nodemailer.createTestAccount((err, account) => {
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
       const errors = {};
-      const time = new Date().getHours();
-      console.log(time);
+
       Profile.findOne({ username: req.params.username })
         .populate("user", ["fn", "email"])
         .then(profile => {

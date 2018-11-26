@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import Spinner from "../common/spinner/Spinner";
 import axios from "axios";
 
-
 import DashboardHeader from "../dashboard/DashboardHeader";
 import DashboardBody from "../dashboard/DashboardBody";
 import {
@@ -75,11 +74,11 @@ class Username extends Component {
     if (profile === null || loading) {
       profileContent = <Spinner />;
     } else {
-          profileContent = (
-            <div>
-              <div className="profile">
-                <div className="container">
-                  <div className="row">
+      profileContent = (
+        <div>
+          <div className="profile">
+            <div className="container">
+              <div className="row">
                 <div className="col-md-12">
                   <div className="row">
                     <div className="col-6">
@@ -108,26 +107,26 @@ class Username extends Component {
                         <i className="fas fa-envelope" />
                       </button>
 
-                      <div class="modal fade" id="myContact" role="dialog">
-                        <div class="modal-dialog modal-sm">
-                          <div class="modal-content">
-                            <div class="modal-header">
+                      <div className="modal fade" id="myContact" role="dialog">
+                        <div className="modal-dialog modal-sm">
+                          <div className="modal-content">
+                            <div className="modal-header">
                               <button
                                 type="button"
-                                class="close"
+                                className="close"
                                 data-dismiss="modal"
                               >
                                 &times;
                               </button>
                             </div>
-                            <div class="modal-body">
+                            <div className="modal-body">
                               <form onSubmit={this.contact}>
                                 message:
                                 <input
                                   type="text"
                                   onChange={this.contactChange}
                                 />
-                                <div class="modal-footer">
+                                <div className="modal-footer">
                                   <button
                                     type="submit"
                                     className="btn btn-default"
@@ -224,6 +223,7 @@ class Username extends Component {
 Username.propTypes = {
   getProfileByUsername: PropTypes.func.isRequired,
   bookSession: PropTypes.func.isRequired,
+  cancelSession: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };

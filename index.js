@@ -26,6 +26,8 @@ const passport = require("passport");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 
+const Profile = require("./models/Profile");
+
 var expressValidator = require("express-validator");
 
 const app = express();
@@ -90,7 +92,6 @@ app.use("/post", post);
 
 const port = process.env.PORT || 5000;
 
-
 //serve static assets if in production
 
 if (process.env.NODE_ENV === "production") {
@@ -101,6 +102,26 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "ementor", "build", "index.html"));
   });
 }
+
+//job scheduling
+
+function intervalFunc() {
+  Profile.find({}).then(profile => {
+    profile.forEach(prof => {
+      prof.availablehours.map(ah => {
+        if (ah.user != null) {
+          ah.user = null;
+          //save the schema
+          prof.save();
+          console.log("bookings refreshed");
+        } else {
+          console.log("no bookings");
+        }
+      });
+    });
+  });
+}
+setInterval(intervalFunc, 43200000);
 
 const server = app.listen(port);
 

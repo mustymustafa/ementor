@@ -84,10 +84,10 @@ class DashboardHeader extends Component {
               </p>
             </div>
             <Online>
-              Online <i class="fas fa-circle" style={{ color: "green" }} />
+              Online <i className="fas fa-circle" style={{ color: "green" }} />
             </Online>
             <Offline>
-              Offline <i class="fas fa-circle" style={{ color: "black" }} />
+              Offline <i className="fas fa-circle" style={{ color: "black" }} />
             </Offline>
           </div>
         </div>
