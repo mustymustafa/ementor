@@ -26,7 +26,7 @@ class ProfileItem extends Component {
               />
               : {profile.rating}
             </p>
-            <a href={`/profile/${profile.username}`} className="btn btn-info">
+            <a href={`/profiles/${profile.username}`} className="btn btn-info">
               View Profile
             </a>
           </div>

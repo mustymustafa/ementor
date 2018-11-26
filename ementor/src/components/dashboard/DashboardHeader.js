@@ -3,8 +3,6 @@ import isEmpty from "../../validation/is-empty";
 import pp from "../../img/pp.png";
 import axios from "axios";
 
-import { Offline, Online } from "react-detect-offline";
-
 class DashboardHeader extends Component {
   render() {
     const { profile } = this.props;
@@ -83,12 +81,6 @@ class DashboardHeader extends Component {
                 )}
               </p>
             </div>
-            <Online>
-              Online <i className="fas fa-circle" style={{ color: "green" }} />
-            </Online>
-            <Offline>
-              Offline <i className="fas fa-circle" style={{ color: "black" }} />
-            </Offline>
           </div>
         </div>
       </div>
