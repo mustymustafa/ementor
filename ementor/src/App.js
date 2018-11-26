@@ -77,11 +77,13 @@ class App extends Component {
                 {" "}
                 <PrivateRoute exact path="/profile" component={Dashboard} />
               </Switch>
-              <PrivateRoute
-                exact
-                path="/profile/:username"
-                component={Username}
-              />
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/profile/:username"
+                  component={Username}
+                />
+              </Switch>
               <Switch>
                 {" "}
                 <PrivateRoute
