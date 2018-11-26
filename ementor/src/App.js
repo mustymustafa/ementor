@@ -69,7 +69,6 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
-              <Route exact path="/profile/:username" component={Username} />
               <Route exact path="/sasprofiles" component={SasProfile} />
               <Route exact path="/sbeprofiles" component={SbeProfile} />
               <Route exact path="/solprofiles" component={SolProfile} />
@@ -77,6 +76,13 @@ class App extends Component {
               <Switch>
                 {" "}
                 <PrivateRoute exact path="/profile" component={Dashboard} />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/profiles/:username"
+                  component={Username}
+                />
               </Switch>
               <Switch>
                 {" "}
