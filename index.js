@@ -7,6 +7,8 @@ const fs = require("fs");
 const http = require("http");
 const https = require("https");
 
+const cron = require("node-cron");
+
 const keys = require("./config/config.js");
 
 const twilio = require("twilio");
@@ -121,7 +123,24 @@ function intervalFunc() {
     });
   });
 }
-setInterval(intervalFunc, 43200000);
+//setInterval(intervalFunc, 43200000);
+
+cron.schedule("0 20 1 * *", function() {
+  Profile.find({}).then(profile => {
+    profile.forEach(prof => {
+      prof.availablehours.map(ah => {
+        if (ah.user != null) {
+          ah.user = null;
+          //save the schema
+          prof.save();
+          console.log("bookings refreshed");
+        } else {
+          console.log("no bookings");
+        }
+      });
+    });
+  });
+});
 
 const server = app.listen(port);
 
