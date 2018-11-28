@@ -125,7 +125,7 @@ function intervalFunc() {
 }
 //setInterval(intervalFunc, 43200000);
 
-cron.schedule("0 20 1 * *", function() {
+cron.schedule("0 35 1 * *", function() {
   Profile.find({}).then(profile => {
     profile.forEach(prof => {
       prof.availablehours.map(ah => {
