@@ -11,7 +11,7 @@ export const registerUser = (userData, history) => dispatch => {
   };
   axios({
     method: "post",
-    url: "/register",
+    url: "/api/register",
     data: userData
   })
     .then(res => history.push("/login"), loginUser(data))
@@ -26,7 +26,7 @@ export const registerUser = (userData, history) => dispatch => {
 export const loginUser = userData => dispatch => {
   axios({
     method: "post",
-    url: "/login",
+    url: "/api/login",
     data: userData
   })
     .then(res => {
@@ -65,5 +65,5 @@ export const logoutUser = () => dispatch => {
   //remove auth header for future request
   setAuthToken(false);
   //set current user to {} which auth will be false
-  dispatch(setCurrentUser({}), window.location.assign("/"));
+  dispatch(setCurrentUser({}));
 };

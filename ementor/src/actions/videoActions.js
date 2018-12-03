@@ -10,7 +10,7 @@ import {
 
 export const rateProfile = (vote, username, history) => dispatch => {
   axios
-    .post(`/profile/${username}/vote`, vote)
+    .post(`/api/profile/${username}/vote`, vote)
     .then(res => history.push(`/profile/${username}`))
     .catch(err =>
       dispatch({

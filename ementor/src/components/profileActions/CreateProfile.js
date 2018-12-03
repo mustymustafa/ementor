@@ -51,7 +51,7 @@ class CreateProfile extends Component {
     };
 
     this.props.createProfile(profileData, this.props.history);
-    this.props.history.push("/login");
+    this.props.logoutUser();
   };
 
   onChange = e => {

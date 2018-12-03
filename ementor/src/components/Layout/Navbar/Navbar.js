@@ -17,52 +17,52 @@ class Navbar extends Component {
       <ul className="navbar-nav ml-auto">
         {user.isTutor ? (
           <li style={{ display: "none" }} className="nav-item ">
-            <a className="nav-link" href="/profile">
+            <Link className="nav-link" to="/profile">
               BECOME A TUTOR
-            </a>
+            </Link>
           </li>
         ) : (
           <li className="nav-item">
-            <a className="nav-link" href="/profile">
+            <Link className="nav-link" to="/profile">
               BECOME A TUTOR
-            </a>
+            </Link>
           </li>
         )}
 
         <li className="nav-item ">
-          <a className="nav-link" href="/posts">
+          <Link className="nav-link" to="/posts">
             Posts
-          </a>
+          </Link>
         </li>
 
         <li className="nav-item">
-          <a className="nav-link" href="/profiles">
+          <Link className="nav-link" to="/profiles">
             Tutors
-          </a>
+          </Link>
         </li>
 
         {user.isTutor ? (
           <li className="nav-item">
-            <a className="nav-link" href="/profile">
+            <Link className="nav-link" to="/profile">
               Profile
-            </a>
+            </Link>
           </li>
         ) : (
           <li style={{ display: "none" }} className="nav-item">
-            <a className="nav-link" href="/profiles">
+            <Link className="nav-link" to="/profiles">
               Tutors
-            </a>
+            </Link>
           </li>
         )}
 
         <li className="nav-item">
-          <a
-            href="#"
+          <Link
+            to="#"
             onClick={this.onLogoutClick.bind(this)}
             className="nav-link"
           >
             Log Out <i className="fas fa-sign-out-alt" />
-          </a>
+          </Link>
         </li>
       </ul>
     );
@@ -86,9 +86,9 @@ class Navbar extends Component {
     return (
       <nav className="navbar sticky-top navbar-light navbar-expand-md navigation-clean-button mb4">
         <div className="container">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             eMentor
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             data-toggle="collapse"

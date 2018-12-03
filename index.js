@@ -88,9 +88,9 @@ const profile = require("./routes/api/profile");
 const home = require("./routes/api/home");
 
 //using routes
-app.use("/", home);
-app.use("/profile", profile);
-app.use("/post", post);
+app.use("/api", home);
+app.use("/api/profile", profile);
+app.use("/api/post", post);
 
 const port = process.env.PORT || 5000;
 
@@ -125,7 +125,7 @@ function intervalFunc() {
 }
 //setInterval(intervalFunc, 43200000);
 
-cron.schedule("0 2 * * *", function() {
+cron.schedule("0 2 * * *", () => {
   Profile.find({}).then(profile => {
     profile.forEach(prof => {
       prof.availablehours.map(ah => {

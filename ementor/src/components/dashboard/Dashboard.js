@@ -10,7 +10,6 @@ import { addPost } from "../../actions/postActions";
 import classnames from "classnames";
 import axios from "axios";
 class Dashboard extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -57,7 +56,7 @@ class Dashboard extends Component {
       link: this.state.link
     };
 
-    axios.post("/profile/invite", data);
+    axios.post("/api/profile/invite", data);
     window.location.assign(`/${this.state.link}`);
   };
 
@@ -99,34 +98,33 @@ class Dashboard extends Component {
                       <div className="col-6">
                         <button
                           type="button"
-                          class="btn btn-info btn-lg float-right"
+                          className="btn btn-info btn-lg float-right"
                           data-toggle="modal"
                           data-target="#myModal"
                         >
                           Create Session
                         </button>
 
-
-                        <div class="modal fade" id="myModal" role="dialog">
-                          <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                              <div class="modal-header">
+                        <div className="modal fade" id="myModal" role="dialog">
+                          <div className="modal-dialog modal-sm">
+                            <div className="modal-content">
+                              <div className="modal-header">
                                 <button
                                   type="button"
-                                  class="close"
+                                  className="close"
                                   data-dismiss="modal"
                                 >
                                   &times;
                                 </button>
                               </div>
-                              <div class="modal-body">
+                              <div className="modal-body">
                                 <form onSubmit={this.onInvite}>
                                   invite:{" "}
                                   <input
                                     type="email"
                                     onChange={this.onInviteChange}
                                   />
-                                  <div class="modal-footer">
+                                  <div className="modal-footer">
                                     <button
                                       type="submit"
                                       className="btn btn-default"

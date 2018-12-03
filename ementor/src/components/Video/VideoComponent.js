@@ -26,13 +26,15 @@ class VideoComponent extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/profile/${this.props.match.params.id}/token`).then(results => {
-      /*
+    axios
+      .get(`/api/profile/${this.props.match.params.id}/token`)
+      .then(results => {
+        /*
 Make an API call to get the token and identity(fake name) and  update the corresponding state variables.
     */
-      const { identity, token } = results.data;
-      this.setState({ identity, token });
-    });
+        const { identity, token } = results.data;
+        this.setState({ identity, token });
+      });
   }
 
   handleRoomNameChange = e => {
@@ -177,7 +179,7 @@ Connect to a room by providing the token and connection    options that include 
     };
 
     axios
-      .post(`/profile/${this.props.match.params.username}/vote`, vote)
+      .post(`/api/profile/${this.props.match.params.username}/vote`, vote)
       .then(
         res =>
           this.props.history.push(

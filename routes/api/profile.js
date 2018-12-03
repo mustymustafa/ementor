@@ -142,7 +142,7 @@ nodemailer.createTestAccount((err, account) => {
                     }
 
                     var mailOptions = {
-                      from: "eMentor <musty.mohammed1998@gmail.com>", // sender address
+                      from: '"eMentor" <musty.mohammed1998@gmail.com>', // sender address
                       to: userData.email, // list of receivers
                       subject: "Profile updated", // Subject line
                       // text: "",
@@ -305,16 +305,36 @@ nodemailer.createTestAccount((err, account) => {
                   ah.user = req.user.id;
 
                   var mailOptions = {
-                    from: "eMentor <musty.mohammed1998@gmail.com>", // sender address
+                    from: '"eMentor" <musty.mohammed1998@gmail.com>', // sender address
                     to: profile.user.email, // list of receivers
                     subject: "Session Request", // Subject line
                     // text: "",
                     html:
+                      "<h5>" +
+                      req.user.fn +
+                      "</h5>" +
+                      "<br/>" +
+                      "<h5>" +
+                      "requested" +
+                      "</h5>" +
+                      "<br/>" +
                       "<b>" +
                       ah.time +
-                      "has been requested by" +
+                      "</b>" +
+                      "<br/>" +
+                      "<h5>" +
+                      "for a live session" +
+                      "</h5>" +
+                      "<p>" +
+                      "kindly invite the user with:" +
                       req.user.email +
-                      "</b>" // html body
+                      "</p>" +
+                      "<p>" +
+                      "create session:" +
+                      "https://ementor.herokuapp.com/profile" +
+                      "</p>"
+
+                    // html body
                   };
 
                   // send mail with defined transport object
@@ -464,22 +484,39 @@ nodemailer.createTestAccount((err, account) => {
 
     console.log(email);
     console.log(link);
+    var mailOptions = {
+      from: '"eMentor" <musty.mohammed1998@gmail.com>', // sender address
+      to: mail, // list of receivers
+      subject: "Session invite", // Subject line
+      // text: "",
+      text: "join session:" + " " + link
+    };
 
-    //send email here
+    // send mail with defined transport object
+    smtpTransport.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      } else {
+        console.log("Message sent: %s", info.messageId);
+      }
+    });
   });
 
   //contact tutor
 
   router.post("/:username/contact", (req, res) => {
     const message = req.body.message;
-    Profile.findOne({ username: req.params.username })
+    const username = req.body.username;
+
+    console.log(username);
+    Profile.findOne({ username: username })
       .populate("user", ["fn", "email"])
       .then(profile => {
         console.log(profile.user.email);
         const mail = profile.user.email;
 
         var mailOptions = {
-          from: "eMentor <musty.mohammed1998@gmail.com>", // sender address
+          from: '"eMentor" <musty.mohammed1998@gmail.com>', // sender address
           to: mail, // list of receivers
           subject: "New Direct Message", // Subject line
           // text: "",
@@ -494,7 +531,8 @@ nodemailer.createTestAccount((err, account) => {
             console.log("Message sent: %s", info.messageId);
           }
         });
-      });
+      })
+      .catch(err => console.log(err));
   });
 
   //end of nodemailer

@@ -204,6 +204,7 @@ img {
   padding-right: 50px;
   width: 800px;
   min-height: 500px;
+  max-height: none;
 }
 
 .closebutton {

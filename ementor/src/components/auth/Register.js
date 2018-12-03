@@ -41,8 +41,9 @@ class Register extends Component {
 
     this.props.registerUser(newUser, this.props.history);
 
-    this.props.loginUser(userData);
     this.props.history.push("/login");
+
+    this.props.loginUser(userData);
   };
 
   componentDidMount() {

@@ -74,7 +74,6 @@ class App extends Component {
               <Route exact path="/solprofiles" component={SolProfile} />
               <Route exact path="/posts" component={Posts} />
               <Switch>
-                {" "}
                 <PrivateRoute exact path="/profile" component={Dashboard} />
               </Switch>
               <Switch>
@@ -85,7 +84,6 @@ class App extends Component {
                 />
               </Switch>
               <Switch>
-                {" "}
                 <PrivateRoute
                   exact
                   path="/createprofile"

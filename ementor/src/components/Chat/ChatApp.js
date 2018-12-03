@@ -31,7 +31,7 @@ class ChatApp extends Component {
   };
 
   getToken = () => {
-    fetch("/profile/chattoken", {
+    fetch("/api/profile/chattoken", {
       method: "POST"
     })
       .then(response => response.json())

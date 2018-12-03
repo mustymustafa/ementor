@@ -29,11 +29,17 @@ class Username extends Component {
     e.preventDefault();
 
     const data = {
-      message: this.state.message
+      message: this.state.message,
+      username: this.props.match.params.username
     };
 
-    axios.post(`/profile/${this.props.match.params.username}/contact`, data);
+    axios.post(
+      `/api/profile/${this.props.match.params.username}/contact`,
+      data
+    );
+    window.location.reload();
   };
+
   //book a time
   onBook(username, bookId) {
     this.props.bookSession(this.props.match.params.username, bookId);
@@ -94,7 +100,6 @@ class Username extends Component {
                       <button
                         className="btn-lg float-right mb-3"
                         type="button"
-                        onClick={this.contact}
                         style={{
                           backgroundColor: "rgba(72, 17, 42)",
                           color: "white",
@@ -121,9 +126,10 @@ class Username extends Component {
                             </div>
                             <div className="modal-body">
                               <form onSubmit={this.contact}>
-                                message:
-                                <input
-                                  type="text"
+                                Message:{" "}
+                                <textarea
+                                  rows="4"
+                                  cols="50"
                                   onChange={this.contactChange}
                                 />
                                 <div className="modal-footer">
@@ -131,7 +137,7 @@ class Username extends Component {
                                     type="submit"
                                     className="btn btn-default"
                                   >
-                                    send
+                                    Send
                                   </button>
                                 </div>
                               </form>

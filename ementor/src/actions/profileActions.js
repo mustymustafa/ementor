@@ -14,7 +14,7 @@ import { logoutUser } from "./authActions";
 export const getCurrentProfile = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get("/profile")
+    .get("/api/profile")
     .then(res =>
       dispatch({
         type: GET_PROFILE,
@@ -34,7 +34,7 @@ export const getCurrentProfile = () => dispatch => {
 export const getSitcProfiles = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get("/profile/sitc")
+    .get("/api/profile/sitc")
     .then(res =>
       dispatch({
         type: GET_PROFILES,
@@ -52,7 +52,7 @@ export const getSitcProfiles = () => dispatch => {
 export const getSasProfiles = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get("/profile/sas")
+    .get("/api/profile/sas")
     .then(res =>
       dispatch({
         type: GET_PROFILES,
@@ -70,7 +70,7 @@ export const getSasProfiles = () => dispatch => {
 export const getSbeProfiles = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get("/profile/sbe")
+    .get("/api/profile/sbe")
     .then(res =>
       dispatch({
         type: GET_PROFILES,
@@ -88,7 +88,7 @@ export const getSbeProfiles = () => dispatch => {
 export const getSolProfiles = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get("/profile/sol")
+    .get("/api/profile/sol")
     .then(res =>
       dispatch({
         type: GET_PROFILES,
@@ -106,7 +106,7 @@ export const getSolProfiles = () => dispatch => {
 // Get profile by username
 export const getProfileByUsername = username => dispatch => {
   axios
-    .get(`/profile/${username}`)
+    .get(`/api/profile/${username}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,
@@ -124,8 +124,8 @@ export const getProfileByUsername = username => dispatch => {
 // Create Profile
 export const createProfile = (profileData, history) => dispatch => {
   axios
-    .post("/profile", profileData)
-    .then(res => history.push("/profile"))
+    .post("/api/profile", profileData)
+    .then(logoutUser())
 
     .catch(err =>
       dispatch({
@@ -139,7 +139,7 @@ export const createProfile = (profileData, history) => dispatch => {
 
 export const bookSession = (username, bookId) => dispatch => {
   axios
-    .get(`/profile/${username}/book/${bookId}`)
+    .get(`/api/profile/${username}/book/${bookId}`)
     .then(res => dispatch(window.location.reload()))
     .catch(err =>
       dispatch({
@@ -153,7 +153,7 @@ export const bookSession = (username, bookId) => dispatch => {
 
 export const cancelSession = (username, bookId) => dispatch => {
   axios
-    .get(`/profile/${username}/cancel/${bookId}`)
+    .get(`/api/profile/${username}/cancel/${bookId}`)
     .then(res => dispatch(window.location.reload()))
     .catch(err =>
       dispatch({

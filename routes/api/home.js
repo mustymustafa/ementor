@@ -76,11 +76,34 @@ nodemailer.createTestAccount((err, account) => {
         .catch(err => console.log(err));
 
       var mailOptions = {
-        from: "eMentor <musty.mohammed1998@gmail.com>", // sender address
+        from: '"eMentor" <musty.mohammed1998@gmail.com>', // sender address
         to: email, // list of receivers
         subject: "Registration Successful", // Subject line
         // text: "",
-        html: "<b>You have successfully registered on eMentor</b>" // html body
+        html:
+          "<b>" +
+          "Welcome to eMentor!" +
+          "</b>" +
+          "Hello," +
+          "<p>" +
+          " You are now a part of a growing online learning community that connects students and instructors around AUN." +
+          "</p>" +
+          "<p>" +
+          " What you’ll find on eMentor:" +
+          "</p>" +
+          "   <ul>" +
+          "<li>" +
+          "        Live 1:1 help from our tutors and expert instructors" +
+          "<li>" +
+          "<li>" +
+          "    Access to our questions and answers section, where you can ask and answer questions" +
+          "<li>" +
+          "<li>" +
+          "Learn on your own terms, by having sessions at your own convenience" +
+          "<li>" +
+          "</ul>"
+
+        // html body
       };
 
       // send mail with defined transport object
@@ -119,7 +142,6 @@ nodemailer.createTestAccount((err, account) => {
       if (!user) {
         errors.email = "email is incorrect";
         return res.status(404).json(errors);
-        
       }
 
       // Check Password

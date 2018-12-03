@@ -65,11 +65,18 @@ nodemailer.createTestAccount((err, account) => {
           console.log(emails);
 
           var mailOptions = {
-            from: "eMentor <musty.mohammed1998@gmail.com>", // sender address
+            from: '"eMentor" <musty.mohammed1998@gmail.com>', // sender address
             to: emails, // list of receivers
             subject: "New Question Posted", // Subject line
             // text: "",
-            html: "<b>A new question relating to your department was posted</b>" // html body
+            html:
+              "<p>A new question relating to your department was posted</p>" +
+              "<p>" +
+              "view question now:" +
+              " " +
+              "https://ementor.herokuapp.com/posts" +
+              "</p>"
+            // html body
           };
 
           // send mail with defined transport object
@@ -172,11 +179,20 @@ nodemailer.createTestAccount((err, account) => {
           newComment.save().then(comment => res.json(comment));
           //send reply email
           var mailOptions = {
-            from: "eMentor <musty.mohammed1998@gmail.com>", // sender address
+            from: '"eMentor" <musty.mohammed1998@gmail.com>', // sender address
             to: post.user.email, // list of receivers
-            subject: "Question Answeed", // Subject line
+            subject: "Question Answered!", // Subject line
             // text: "",
-            html: "<b>A new  answer to your question was posted</b>" // html body
+            html:
+              "<p>A new  answer to your question was posted</p>" +
+              "<p>" +
+              "view answer here:" +
+              "" +
+              " https://ementor.herokuapp.com/post/" +
+              postId +
+              "</p>"
+
+            // html body
           };
 
           // send mail with defined transport object
