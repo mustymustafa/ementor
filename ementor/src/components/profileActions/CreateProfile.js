@@ -186,8 +186,7 @@ class CreateProfile extends Component {
                   )}
 
                   <small className="form-text text-muted">
-                    A unique username for your profile URL(This CAN'T be changed
-                    later)
+                    A unique username for your profile URL
                   </small>
                 </div>
                 <div className="form-group">
@@ -253,6 +252,7 @@ class CreateProfile extends Component {
                     name="availablehours"
                     onChange={this.onChange}
                     value={this.state.availablehours}
+                    required
                   />
 
                   <small className="form-text text-muted">

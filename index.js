@@ -125,22 +125,28 @@ function intervalFunc() {
 }
 //setInterval(intervalFunc, 43200000);
 
-cron.schedule("0 2 * * *", () => {
-  Profile.find({}).then(profile => {
-    profile.forEach(prof => {
-      prof.availablehours.map(ah => {
-        if (ah.user != null) {
-          ah.user = null;
-          //save the schema
-          prof.save();
-          console.log("bookings refreshed");
-        } else {
-          console.log("no bookings");
-        }
+cron.schedule(
+  "0 2 * * *",
+  () => {
+    Profile.find({}).then(profile => {
+      profile.forEach(prof => {
+        prof.availablehours.map(ah => {
+          if (ah.user != null) {
+            ah.user = null;
+            //save the schema
+            prof.save();
+            console.log("bookings refreshed");
+          } else {
+            console.log("no bookings");
+          }
+        });
       });
     });
-  });
-});
+  },
+  {
+    scheduled: true
+  }
+);
 
 const server = app.listen(port);
 

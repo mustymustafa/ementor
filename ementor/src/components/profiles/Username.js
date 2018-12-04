@@ -129,7 +129,7 @@ class Username extends Component {
                                 Message:{" "}
                                 <textarea
                                   rows="4"
-                                  cols="50"
+                                  cols="30"
                                   onChange={this.contactChange}
                                 />
                                 <div className="modal-footer">
